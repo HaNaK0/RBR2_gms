@@ -13,7 +13,10 @@
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_bob</object>
-    <object>objects\obj_tile</object>
+    <objects name="tiles">
+      <object>objects\obj_tile</object>
+    </objects>
+    <object>objects\fps</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
