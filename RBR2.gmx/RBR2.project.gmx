@@ -16,7 +16,7 @@
     <objects name="tiles">
       <object>objects\obj_tile</object>
     </objects>
-    <object>objects\fps</object>
+    <object>objects\debug_print</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>

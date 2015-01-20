@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(x,y, string(fps_real))
+            <string>draw_text(x,y, string(fps))
+draw_text(x,y + 16, string(obj_bob.closeToWall))
 </string>
           </argument>
         </arguments>
