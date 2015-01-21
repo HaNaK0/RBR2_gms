@@ -25,11 +25,57 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>enum wall {
+            <string>enum timers {
+    attackR,
+    attackU,
+    attackL,
+    attackD,
+    comboSpace,
+    main,
+    rigthAD,
+    upAD,
+    leftAD,
+    downAD
+}
+
+enum dir{
+    no,
+    right,
+    up,
+    left,
+    down
+}
+
+enum wall {
     NO,
     LEFT,
     RIGHT
 }
+
+nrOfTimers = 10
+/*
+[0] attack right
+[1] attack up
+[2] attack left
+[3] attack down
+[4] combo space
+[5] main
+[6] right attack duration
+[7] up attack duration
+[8] left attack duartion
+[9] down attack duartion
+*/
+for (i = 0; i  &lt; nrOfTimers; i++)
+{
+    cooldownTimers[i] = 0
+}
+
+//combo space
+comboSpace = 0.1
+//main cooldown
+cooldownMain = 1;
+//attack duartion
+attackDuration = 0.2
 
 //speed when moving sideways
 mySpeed = 2;
@@ -40,7 +86,7 @@ jumpForce = -4;
 // the retardation of bob  horizontaly
 drag = 0.05
 //the delay before bob releases from the wall in seconds
-releaseDelay = 0.5
+releaseDelay = 0.2
 
 //walk accelleration
 accelleration = 0.1
@@ -65,6 +111,15 @@ relDelTimer = -1
 wallJump = 4
 
 wallRelDel = false
+
+//lunge speed
+lungeSpeed = 10
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -118,7 +173,7 @@ else if collision_line(x + 11, y + 11, x + 11, y - 12, obj_tile, false, false)
 }
 else
 {
-    closeToWall = wall.NO
+    closeToWall = wall.No
 }
 
 //wall grab
@@ -149,7 +204,28 @@ if relDelTimer == 0
     wallRelDel = false
 }
 
-//if bob is fallinjg the accellerate downwards
+/*
+timers:
+[0] attack right
+[1] attack up
+[2] attack left
+[3] attack down
+[4] combo-space
+[5] main
+[6] right attack duration
+[7] up attack duration
+[8] left attack duartion
+[9] down attack duartion
+*/
+for (i = 0; i  &lt; nrOfTimers; i++)
+{
+    if cooldownTimers[i] &gt;= 0
+    {
+        cooldownTimers[i] -= 1
+    }
+}
+
+//if bob is falling then accellerate downwards
 if isFalling == true
 {
     fallSpeed += grav
@@ -182,27 +258,43 @@ else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.RIGHT
 //lef/right input
 if keyboard_check(ord('A'))
 {
-    hSpeed -= accelleration
-    if hSpeed &lt; -mySpeed
+    
+    if hSpeed &gt; -mySpeed
     {
-        hSpeed = -mySpeed
+        hSpeed -= accelleration
     }
 }
 else if keyboard_check(ord('D'))
 {
-    hSpeed += accelleration
-    if hSpeed &gt; mySpeed
+    
+    if hSpeed &lt; mySpeed
     {
-        hSpeed = mySpeed
+        hSpeed += accelleration
     }  
 }
-else if hSpeed &gt; 0
+
+// drag calculation
+if hSpeed &gt; 0
 {
     hSpeed -= drag
 }
 else if hSpeed &lt; 0
 {
     hSpeed += drag
+}
+
+//attack
+if keyboard_check_pressed(vk_right) &amp;&amp; attack == dir.no
+{
+    attack = dir.right
+    cooldownTimers[timers.rightAD] = attackDuration * 120
+    cooldownTimers[timers.attackR] = cooldownMain * 120
+}
+else if keyboard_check_pressed(vk_up) &amp;&amp; attack == dir.no
+{
+    attack = dir.up
+    cooldownTimers[timers.upAD] = attackDuration * 120
+    cooldownTimers[timers.attackU] = cooldownMain * 120
 }
 
 //gravity collision
@@ -257,8 +349,6 @@ else if hSpeed &gt; 0
         tempPosX = vCollider.x - 11
     }
 }
-
-
 
 //movement execution
 //all movement is executed here
