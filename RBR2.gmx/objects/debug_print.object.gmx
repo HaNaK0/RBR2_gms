@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>draw_text(x,y, string(fps))
 draw_text(x,y + 16, string(obj_bob.closeToWall))
+draw_text(x,y + 16 * 2, string(obj_bob.relDelTimer))
 </string>
           </argument>
         </arguments>
