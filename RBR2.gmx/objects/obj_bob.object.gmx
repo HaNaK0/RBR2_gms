@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>enum timers {
+            <string>X = 0;
+Y = 1;
+
+enum timers {
     attackR,
     attackU,
     attackL,
@@ -52,7 +55,7 @@ enum wall {
     RIGHT
 }
 
-nrOfTimers = 10
+nrOfTimers = 7
 /*
 [0] attack right
 [1] attack up
@@ -60,10 +63,7 @@ nrOfTimers = 10
 [3] attack down
 [4] combo space
 [5] main
-[6] right attack duration
-[7] up attack duration
-[8] left attack duartion
-[9] down attack duartion
+[6] attack duration
 */
 for (i = 0; i  &lt; nrOfTimers; i++)
 {
@@ -115,11 +115,40 @@ wallRelDel = false
 //lunge speed
 lungeSpeed = 10
 
+//sword position
+swordHiltPos[0] = 0
+swordHiltPos[1] = 0
+swordTipPos[0] = 0
+swordTipPos[1] = 0
+
+// end position right
+/*
+[0] hilt x
+[1] hilt y
+[2] tip x
+[3] tip y
+*/
 
 
+sRightEndPos[0] = 0
+sRightEndPos[1] = 0
+sRightEndPos[2] = -32
+sRightEndPos[3] = 0
 
+sUpEndPos[0] = 0
+sUpEndPos[1] = 0
+sUpEndPos[2] = 0
+sUpEndPos[3] = -32
 
+sLeftEndPos[0] = 0
+sLeftEndPos[1] = 0
+sLeftEndPos[2] = 32
+sLeftEndPos[3] = 0
 
+sDownEndPos[0] = 0
+sDownEndPos[1] = 0
+sDownEndPos[2] = 0
+sDownEndPos[3] = 0
 </string>
           </argument>
         </arguments>
@@ -212,10 +241,7 @@ timers:
 [3] attack down
 [4] combo-space
 [5] main
-[6] right attack duration
-[7] up attack duration
-[8] left attack duartion
-[9] down attack duartion
+[6] attack duartion
 */
 for (i = 0; i  &lt; nrOfTimers; i++)
 {
@@ -287,14 +313,48 @@ else if hSpeed &lt; 0
 if keyboard_check_pressed(vk_right) &amp;&amp; attack == dir.no
 {
     attack = dir.right
-    cooldownTimers[timers.rightAD] = attackDuration * 120
+    cooldownTimers[6] = attackDuration * 120
     cooldownTimers[timers.attackR] = cooldownMain * 120
 }
 else if keyboard_check_pressed(vk_up) &amp;&amp; attack == dir.no
 {
     attack = dir.up
-    cooldownTimers[timers.upAD] = attackDuration * 120
+    cooldownTimers[6] = attackDuration * 120
     cooldownTimers[timers.attackU] = cooldownMain * 120
+}
+else if keyboard_check_pressed(vk_left) &amp;&amp; attack == dir.no
+{
+    attack = dir.left
+    cooldownTimers[6] = attackDuration * 120
+    cooldownTimers[timers.attackL] = cooldownMain * 120
+}
+else if keyboard_check_pressed(vk_down) &amp;&amp; attack == dir.no &amp;&amp; isFalling
+{
+    attack = dir.down
+    cooldownTimers[6] = attackDuration * 120
+    cooldownTimers[timers.attackD] = cooldownMain * 120
+}
+
+//attack animation and collision
+if attack != dir.no
+{
+    var hitEnemy = collision_line(x + swordHiltPos[X],y + swordHiltPos[Y],x + swordTipPos[X],y + swordTipPos[Y], obj_enemy, false, false)
+    
+    switch attack
+    {
+    case dir.right:
+        swordTipPos[X] = sRightEndPos[2] * (1- cooldownTimers[6]/(attackDuration * 120))
+        break
+    case dir.up:
+        swordTipPos[Y] = sUpEndPos[3] * (1- cooldownTimers[6]/(attackDuration * 120))
+        break
+    case dir.left:
+        swordTipPos[X] = sLeftEndPos[2] * (1- cooldownTimers[6]/(attackDuration * 120))
+        break
+    case dir.down:
+        swordTipPos[X] = sDownEndPos[2] * (1- cooldownTimers[6]/(attackDuration * 120))
+        swordTipPos[Y] = sDownEndPos[3] * (1- cooldownTimers[6]/(attackDuration * 120))
+    }
 }
 
 //gravity collision
@@ -355,6 +415,37 @@ else if hSpeed &gt; 0
 x = tempPosX
 y = tempPosY
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self()
+
+//drawing sword collision line
+//Only for bugtesting
+if global.debug
+{
+    draw_set_colour(c_lime)
+    draw_line(x + swordHiltPos[X],y + swordHiltPos[Y],x + swordTipPos[X],y + swordTipPos[Y])
+}
 </string>
           </argument>
         </arguments>
