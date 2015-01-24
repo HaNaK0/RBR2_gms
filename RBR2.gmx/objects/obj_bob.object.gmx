@@ -70,8 +70,18 @@ for (i = 0; i  &lt; nrOfTimers; i++)
     cooldownTimers[i] = 0
 }
 
-//combo space
-comboSpace = 0.1
+//using the dir enums
+for (i = 0; i  &lt; 5; i++)
+{
+    hold[i] = 5
+}
+
+// attack
+attack = dir.no
+//follow up attack
+followUp = dir.no
+//follow up active
+comboing = false
 //main cooldown
 cooldownMain = 1;
 //attack duartion
@@ -310,33 +320,97 @@ else if hSpeed &lt; 0
 }
 
 //attack
-if keyboard_check_pressed(vk_right) &amp;&amp; attack == dir.no
+if keyboard_check_pressed(vk_right) &amp;&amp; cooldownTimers[timers.attackR] &lt;= 0
 {
-    attack = dir.right
-    cooldownTimers[6] = attackDuration * 120
-    cooldownTimers[timers.attackR] = cooldownMain * 120
+    if attack ==  dir.no
+    {
+        attack = dir.right
+        cooldownTimers[6] = attackDuration * 120
+        cooldownTimers[timers.attackR] = cooldownMain * 120
+        hold[dir.right] = true
+    }
+    else
+    {
+        switch attack
+        {
+        case dir.up:
+        case dir.down:
+            followUp = dir.right
+            cooldownTimers[timers.attackR] = cooldownMain * 120
+            hold[dir.right] = true
+            break;
+        }
+    }
 }
-else if keyboard_check_pressed(vk_up) &amp;&amp; attack == dir.no
+else if keyboard_check_pressed(vk_up) &amp;&amp; cooldownTimers[timers.attackU] &lt;= 0
 {
-    attack = dir.up
-    cooldownTimers[6] = attackDuration * 120
-    cooldownTimers[timers.attackU] = cooldownMain * 120
+    if attack == dir.no
+    {
+        attack = dir.up
+        cooldownTimers[6] = attackDuration * 120
+        cooldownTimers[timers.attackU] = cooldownMain * 120
+        hold[dir.up] = true
+    }
+    else
+    {
+        switch attack
+        {
+        case dir.left:
+        case dir.right:
+            followUp = dir.up
+            cooldownTimers[timers.attackU] = cooldownMain * 120
+            hold[dir.up] = true
+            break
+        }
+    }
 }
-else if keyboard_check_pressed(vk_left) &amp;&amp; attack == dir.no
+else if keyboard_check_pressed(vk_left) &amp;&amp; cooldownTimers[timers.attackL] &lt;= 0
 {
-    attack = dir.left
-    cooldownTimers[6] = attackDuration * 120
-    cooldownTimers[timers.attackL] = cooldownMain * 120
+    if attack == dir.no
+    {
+        attack = dir.left
+        cooldownTimers[6] = attackDuration * 120
+        cooldownTimers[timers.attackL] = cooldownMain * 120
+        hold[dir.left] = true
+    }
+    else
+    {
+        switch attack
+        {
+        case dir.up:
+        case dir.down:
+            followUp = dir.left
+            cooldownTimers[timers.attackL] = cooldownMain * 120
+            hold[dir.left] = true
+            break;
+        }
+    }
 }
-else if keyboard_check_pressed(vk_down) &amp;&amp; attack == dir.no &amp;&amp; isFalling
+else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD] &lt;= 0 &amp;&amp; isFalling
 {
-    attack = dir.down
-    cooldownTimers[6] = attackDuration * 120
-    cooldownTimers[timers.attackD] = cooldownMain * 120
+    if attack == dir.no
+    {
+        attack = dir.down
+        cooldownTimers[6] = attackDuration * 120
+        cooldownTimers[timers.attackD] = cooldownMain * 120
+        hold[dir.down] = true
+    }
+    else
+    {
+        switch attack
+        {
+        case dir.left:
+        case dir.right:
+            followUp = dir.down
+            cooldownTimers[timers.attackD] = cooldownMain * 120
+            hold[dir.down] = true
+            break;
+        }
+    }
 }
 
 //attack animation and collision
-if attack != dir.no
+if attack != dir.no &amp;&amp; comboing == false
 {
     var hitEnemy = collision_line(x + swordHiltPos[X],y + swordHiltPos[Y],x + swordTipPos[X],y + swordTipPos[Y], obj_enemy, false, false)
     
@@ -355,6 +429,45 @@ if attack != dir.no
         swordTipPos[X] = sDownEndPos[2] * (1- cooldownTimers[6]/(attackDuration * 120))
         swordTipPos[Y] = sDownEndPos[3] * (1- cooldownTimers[6]/(attackDuration * 120))
     }
+    
+    // enemy gets destoryed and time is gven to player
+    //todo: implement timer and add time to it
+    if hitEnemy != noone
+    {
+        with(hitEnemy)
+        {
+        instance_destroy()
+        }
+    }
+}
+/*else if attack != dir.no
+{
+    //this will be messy 
+    //but first it checks for which animation to do and then it executes it
+    var hitEnemy = collision_line(x + swordHiltPos[X],y + swordHiltPos[Y],x + swordTipPos[X],y + swordTipPos[Y], obj_enemy, false, false)
+    
+    switch attack
+    {
+    case dir.right:
+        switch previousA
+        {
+        case dir.up:
+            
+        }
+    }
+    
+    if hitEnemy != noone
+    {
+        with(hitEnemy)
+        {
+        instance_destroy()
+        }
+    }
+}*/
+
+if cooldownTimers[6] == 0
+{
+    
 }
 
 //gravity collision
