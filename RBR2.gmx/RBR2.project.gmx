@@ -16,6 +16,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_bob</sprite>
     <sprite>sprites\spr_block</sprite>
+    <sprite>sprites\spr_tile_half_NW</sprite>
     <sprite>sprites\spr_enemy</sprite>
   </sprites>
   <backgrounds name="background"/>
@@ -23,6 +24,7 @@
   <objects name="objects">
     <object>objects\obj_bob</object>
     <objects name="tiles">
+      <object>objects\obj_tile_half_NW</object>
       <object>objects\obj_tile</object>
     </objects>
     <objects name="debug">
