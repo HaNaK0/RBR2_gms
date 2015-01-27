@@ -61,7 +61,7 @@ enum wall {
     RIGHT
 }
 
-nrOfTimers = 8
+nrOfTimers = 7
 /*
 [0] attack right
 [1] attack up
@@ -288,19 +288,16 @@ else
 if keyboard_check_pressed(vk_space) == true &amp;&amp; isFalling == false
 {
     fallSpeed = jumpForce
-    audio_play_sound(Jump, 1, false);   
 }
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.LEFT
 {
     fallSpeed = jumpForce
     hSpeed = wallJump
-    audio_play_sound(Jump, 1, false);
 }
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.RIGHT
 {
     fallSpeed = jumpForce
     hSpeed = -wallJump
-    audio_play_sound(Jump, 1, false);
 }
 
 if cooldownTimers[6] &gt; 0
@@ -323,17 +320,12 @@ if cooldownTimers[6] &gt; 0
 }
 
 //lef/right input
-if hSpeed != 0 &amp;&amp; cooldownTimers[7] &lt;= 0 &amp;&amp; isFalling == false
-{
-
-    audio_play_sound(Step, 1, false);
-    cooldownTimers[7] = (abs(hSpeed)*-0.01+0.3)*room_speed;
-}
 if keyboard_check(ord('A'))
 {
     
     if hSpeed &gt; -mySpeed
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
         hSpeed -= accelleration   
 =======
@@ -346,10 +338,11 @@ if keyboard_check(ord('A'))
             hSpeed -= accelleration
         }
 >>>>>>> d6ba5db30ad38fabf6463ada5e3c0b2d5f78bb1b
+=======
+        hSpeed -= accelleration
+>>>>>>> parent of 11f07b3... Sounds+Level Added all the sounds to a folder and made some code to use the sounds in-game and started a level
     }
 }
-
-
 else if keyboard_check(ord('D'))
 {
     
@@ -489,7 +482,6 @@ if keyboard_check_released(vk_right)
     if cooldownTimers[6] &lt;= 0 &amp;&amp; comboing == false
     {
         attack = dir.no 
-        audio_play_sound(Slash, 1, false);   
     }
 }
 
