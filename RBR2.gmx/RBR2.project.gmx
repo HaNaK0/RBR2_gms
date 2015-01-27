@@ -4,7 +4,15 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sounds name="SFX">
+      <sound>sound\Jump</sound>
+      <sound>sound\Slash2</sound>
+      <sound>sound\Slash</sound>
+      <sound>sound\Slash3</sound>
+      <sound>sound\Step</sound>
+    </sounds>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_bob</sprite>
     <sprite>sprites\spr_block</sprite>
@@ -26,6 +34,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
+    <room>rooms\Philip</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
