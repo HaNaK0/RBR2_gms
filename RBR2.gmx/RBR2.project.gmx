@@ -17,6 +17,7 @@
     <object>objects\obj_bob</object>
     <objects name="tiles">
       <object>objects\obj_tile_half_NW</object>
+      <object>objects\obj_tile_full</object>
       <object>objects\obj_tile</object>
     </objects>
     <objects name="debug">
@@ -24,6 +25,12 @@
     </objects>
     <objects name="enemies">
       <object>objects\obj_enemy</object>
+    </objects>
+    <objects name="ui">
+      <object>objects\ui_timer</object>
+    </objects>
+    <objects name="control">
+      <object>objects\ctrl_camera</object>
     </objects>
   </objects>
   <rooms name="rooms">

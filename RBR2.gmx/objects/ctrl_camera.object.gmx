@@ -2,7 +2,7 @@
 <object>
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
-  <visible>-1</visible>
+  <visible>0</visible>
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,13 +25,27 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.debug = true
+            <string>// view
+centerPosX = obj_bob.x
+centerPosY = obj_bob.y
+
+view_hview[0] = 900
+view_wview[0] = 1600
+
+view_xview[0] = centerPosX - view_wview[0] / 2
+view_yview[0] = centerPosY - view_hview[0] / 2
+
+view_visible[0] = true
+view_enabled = true
+
+cameraHSpeed = 0
+cameraVspeed = 0
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="64">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -48,14 +62,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_colour(c_black)
-draw_text(x,y, string(fps))
-draw_text(x,y + 16, string(ui_timer.percentage))
-draw_text(x,y + 16 * 2, string(ui_timer.mainTimer / room_speed))
-//draw_text(x,y + 16 * 2, string(obj_bob.cooldownTimers[6]))
-//draw_text(x,y + 16 * 3, string(obj_bob.attack))
- 
+            <string>//update view
+view_xview[0] = centerPosX - view_wview[0] / 2
+view_yview[0] = centerPosY - view_hview[0] / 2
 
+cameraHSpeed = (obj_bob.x - centerPosX)/ 10
+cameraVSpeed = (obj_bob.y - centerPosY)/ 10
+
+centerPosX += cameraHSpeed
+centerPosY += cameraVSpeed
 </string>
           </argument>
         </arguments>

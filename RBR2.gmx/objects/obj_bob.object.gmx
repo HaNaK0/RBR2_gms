@@ -94,30 +94,30 @@ cooldownMain = 1;
 attackDuration =0.1
 
 //speed when moving sideways
-mySpeed = 3;
+mySpeed = 6;
 //sped currently moving veritcaly
 hSpeed = 0;
 // the speed your jump astarts at
-jumpForce = -4;
+jumpForce = -8;
 // the retardation of bob  horizontaly
-drag = 0.1
-dragInAir = 0.05
+drag = 0.2
+dragInAir = 0.1
 //the delay before bob releases from the wall in seconds
 releaseDelay = 0.3
 
 //walk accelleration
-accelleration = 0.4
-accInAir = 0.1
+accelleration = 0.8
+accInAir = 0.2
 
 //the global gravity aceleration
-grav = 0.1;
+grav = 0.3;
 // current fallspeed
 fallSpeed = 0;
 // maximum fallspeed
-maxFallsp = 5;
+maxFallsp = 10;
 fallLimit = maxFallsp;
 //speed when bob glides down the wall
-wallGlide = 1
+wallGlide = 2
 
 isFalling = false;
 closeToWall = wall.NO
@@ -126,12 +126,12 @@ closeToWall = wall.NO
 relDelTimer = -1
 
 //force using to jump from wall
-wallJump = 4
+wallJump = 8
 
 wallRelDel = false
 
 //lunge speed
-lungeSpeed = 6
+lungeSpeed = 12
 
 //sword position
 swordHiltPos[0] = 0
@@ -197,6 +197,11 @@ deltaPosY = y - tempPosY
 tempPosX = x
 tempPosY = y
 
+//close the game
+if keyboard_check(vk_escape)
+{
+    game_end()
+}
 
 // fall check
 //checks if bob is standing on a tile and sets isFalling to false if he is
@@ -324,11 +329,8 @@ if keyboard_check(ord('A'))
 {
     
     if hSpeed &gt; -mySpeed
-    {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        hSpeed -= accelleration   
-=======
+    { 
+
         if isFalling
         {
             hSpeed -= accInAir
@@ -337,10 +339,6 @@ if keyboard_check(ord('A'))
         {
             hSpeed -= accelleration
         }
->>>>>>> d6ba5db30ad38fabf6463ada5e3c0b2d5f78bb1b
-=======
-        hSpeed -= accelleration
->>>>>>> parent of 11f07b3... Sounds+Level Added all the sounds to a folder and made some code to use the sounds in-game and started a level
     }
 }
 else if keyboard_check(ord('D'))
@@ -708,8 +706,7 @@ if fallSpeed &gt;= 0
     {
         switch vCollision.orientation
         {
-            case 0:
-                
+            case 0: 
                 tempPosY = vCollision.y - 1 *(x - vCollision.x) + 32
                 break
         }
@@ -736,7 +733,7 @@ else
 // horizontal collision
 if hSpeed &lt; 0
 {   
-    var vCollider = collision_line(x -10 + hSpeed, tempPosY - 11, x -10 + hSpeed, tempPosY + 11, obj_tile, false, false)
+    var vCollider = collision_line(x -10 + hSpeed, tempPosY - 11, x -10 + hSpeed, tempPosY + 11, obj_tile_full, false, false)
     if vCollider == noone
     {
         tempPosX += hSpeed
@@ -749,7 +746,7 @@ if hSpeed &lt; 0
 }
 else if hSpeed &gt; 0
 {   
-    var vCollider = collision_line(x +10 + hSpeed, tempPosY - 11, x +10 + hSpeed, tempPosY + 11, obj_tile, false, false);
+    var vCollider = collision_line(x +10 + hSpeed, tempPosY - 11, x +10 + hSpeed, tempPosY + 11, obj_tile_full, false, false);
     if vCollider == noone
     {
         tempPosX += hSpeed
