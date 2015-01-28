@@ -30,7 +30,7 @@ mainTimer = -1
 pause = false
 percentage = 0
 maxTime = 2 * 60
-startTime = 30
+startTime = 2 * 60
 
 mainTimer = startTime * room_speed
 </string>
@@ -89,7 +89,7 @@ if mainTimer == 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var percentage = (mainTimer / maxTime)
+            <string>percentage = mainTimer / (maxTime * room_speed)
 
 draw_set_colour(merge_colour(c_red, c_green, percentage))
 

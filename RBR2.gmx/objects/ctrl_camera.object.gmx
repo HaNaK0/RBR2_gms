@@ -29,14 +29,7 @@
 centerPosX = obj_bob.x
 centerPosY = obj_bob.y
 
-view_hview[0] = 900
-view_wview[0] = 1600
 
-view_xview[0] = centerPosX - view_wview[0] / 2
-view_yview[0] = centerPosY - view_hview[0] / 2
-
-view_visible[0] = true
-view_enabled = true
 
 cameraHSpeed = 0
 cameraVspeed = 0
