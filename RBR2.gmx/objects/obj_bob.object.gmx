@@ -82,6 +82,9 @@ for (i = 0; i  &lt; 5; i++)
     hold[i] = 5
 }
 
+//time g you get from an enemy
+enemyTime = 5
+
 // attack
 attack = dir.no
 //follow up attack
@@ -189,13 +192,21 @@ sDownEndPos[3] = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//movement 
-deltaPosX = x - tempPosX
-deltaPosY = y - tempPosY
+            <string>
 
 //setting up the variables to keep wher the new object will end up
-tempPosX = x
-tempPosY = y
+var tempPosX = x
+var tempPosY = y
+
+//goal collison
+if distance_to_object(obj_goal) &lt; 32
+{
+    if collision_rectangle(x - 10, y - 11, x + 10, y - 11, obj_goal, false, true) != noone
+    {
+        show_message("you won")
+        game_end()
+    }
+}
 
 //close the game
 if keyboard_check(vk_escape)
@@ -563,6 +574,7 @@ if attack != dir.no &amp;&amp; comboing == false
         {
         instance_destroy()
         }
+    addTime(enemyTime)
     }
 }
 else if attack != dir.no
@@ -642,6 +654,7 @@ else if attack != dir.no
         {
         instance_destroy()
         }
+    addTime(enemyTime)
     }
 }
 
