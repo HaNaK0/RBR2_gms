@@ -28,6 +28,12 @@
             <string>X = 0;
 Y = 1;
 
+tempPosX = x
+tempPosY = y
+
+deltaPosX = 0
+deltaPosY = 0
+
 enum timers {
     attackR,
     attackU,
@@ -55,7 +61,7 @@ enum wall {
     RIGHT
 }
 
-nrOfTimers = 8
+nrOfTimers = 7
 /*
 [0] attack right
 [1] attack up
@@ -76,6 +82,9 @@ for (i = 0; i  &lt; 5; i++)
     hold[i] = 5
 }
 
+//time g you get from an enemy
+enemyTime = 5
+
 // attack
 attack = dir.no
 //follow up attack
@@ -85,31 +94,33 @@ comboing = false
 //main cooldown
 cooldownMain = 1;
 //attack duartion
-attackDuration = 0.1
+attackDuration =0.1
 
 //speed when moving sideways
-mySpeed = 5;
+mySpeed = 6;
 //sped currently moving veritcaly
 hSpeed = 0;
 // the speed your jump astarts at
-jumpForce = -4;
+jumpForce = -8;
 // the retardation of bob  horizontaly
-drag = 0.05
+drag = 0.2
+dragInAir = 0.1
 //the delay before bob releases from the wall in seconds
-releaseDelay = 0.2
+releaseDelay = 0.3
 
 //walk accelleration
-accelleration = 0.1
+accelleration = 0.8
+accInAir = 0.2
 
 //the global gravity aceleration
-grav = 0.1;
+grav = 0.3;
 // current fallspeed
 fallSpeed = 0;
 // maximum fallspeed
-maxFallsp = 5;
+maxFallsp = 10;
 fallLimit = maxFallsp;
 //speed when bob glides down the wall
-wallGlide = 1
+wallGlide = 2
 
 isFalling = false;
 closeToWall = wall.NO
@@ -118,12 +129,12 @@ closeToWall = wall.NO
 relDelTimer = -1
 
 //force using to jump from wall
-wallJump = 4
+wallJump = 8
 
 wallRelDel = false
 
 //lunge speed
-lungeSpeed = 10
+lungeSpeed = 12
 
 //sword position
 swordHiltPos[0] = 0
@@ -181,13 +192,27 @@ sDownEndPos[3] = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//movement 
-
+            <string>
 
 //setting up the variables to keep wher the new object will end up
 var tempPosX = x
 var tempPosY = y
 
+//goal collison
+if distance_to_object(obj_goal) &lt; 32
+{
+    if collision_rectangle(x - 10, y - 11, x + 10, y - 11, obj_goal, false, true) != noone
+    {
+        show_message("you won")
+        game_end()
+    }
+}
+
+//close the game
+if keyboard_check(vk_escape)
+{
+    game_end()
+}
 
 // fall check
 //checks if bob is standing on a tile and sets isFalling to false if he is
@@ -203,15 +228,15 @@ else
 
 //wall check
 //checks if bob is next to a wall
-if collision_line(x - 11, y + 11, x - 11, y - 12, obj_tile, false, false)
+if collision_line(x - 11, y + 11, x - 11, y - 12, obj_tile, false, false) &amp;&amp; keyboard_check(ord('A'))
 {
     closeToWall = wall.LEFT
 }
-else if collision_line(x + 11, y + 11, x + 11, y - 12, obj_tile, false, false)
+else if collision_line(x + 11, y + 11, x + 11, y - 12, obj_tile, false, false) &amp;&amp; keyboard_check(ord('D'))
 {
     closeToWall = wall.RIGHT
 }
-else
+else if collision_line(x + 11, y + 11, x + 11, y - 12, obj_tile, false, false) == noone
 {
     closeToWall = wall.NO
 }
@@ -220,7 +245,6 @@ else
 if closeToWall &amp;&amp; (( keyboard_check(ord('A')) || keyboard_check(ord('D')) ) ||  wallRelDel == true)
 {   
     fallLimit = wallGlide
-
 }
 else
 {
@@ -280,55 +304,92 @@ else
 if keyboard_check_pressed(vk_space) == true &amp;&amp; isFalling == false
 {
     fallSpeed = jumpForce
-    audio_play_sound(Jump, 1, false);   
 }
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.LEFT
 {
     fallSpeed = jumpForce
     hSpeed = wallJump
-    audio_play_sound(Jump, 1, false);
 }
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.RIGHT
 {
     fallSpeed = jumpForce
     hSpeed = -wallJump
-    audio_play_sound(Jump, 1, false);
+}
+
+if cooldownTimers[6] &gt; 0
+{
+    switch attack
+    {
+    case dir.right:
+        hSpeed = lungeSpeed
+        break
+    case dir.up:
+        fallSpeed = -lungeSpeed
+        break
+    case dir.left:
+        hSpeed = -lungeSpeed
+        break
+    case dir.down:
+        fallSpeed = lungeSpeed
+        break
+    }
 }
 
 //lef/right input
-if hSpeed != 0 &amp;&amp; cooldownTimers[7] &lt;= 0 &amp;&amp; isFalling == false
-{
-
-    audio_play_sound(Step, 1, false);
-    cooldownTimers[7] = (abs(hSpeed)*-0.01+0.3)*room_speed;
-}
 if keyboard_check(ord('A'))
 {
     
     if hSpeed &gt; -mySpeed
-    {
-        hSpeed -= accelleration   
+    { 
+
+        if isFalling
+        {
+            hSpeed -= accInAir
+        }
+        else
+        {
+            hSpeed -= accelleration
+        }
     }
 }
-
-
 else if keyboard_check(ord('D'))
 {
     
     if hSpeed &lt; mySpeed
     {
-        hSpeed += accelleration
+        if isFalling
+        {
+            hSpeed += accInAir
+        }
+        else
+        {
+            hSpeed += accelleration
+        }
     }  
 }
 
 // drag calculation
 if hSpeed &gt; 0
 {
-    hSpeed -= drag
+    if isFalling
+    {
+        hSpeed -= dragInAir
+    }
+    else
+    {
+        hSpeed -= drag
+    }
 }
 else if hSpeed &lt; 0
 {
-    hSpeed += drag
+    if isFalling
+    {
+        hSpeed += dragInAir
+    }
+    else
+    {
+        hSpeed += drag
+    }
 }
 
 //attack
@@ -421,6 +482,8 @@ else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD
     }
 }
 
+
+
 //attack keys released
 if keyboard_check_released(vk_right)
 {
@@ -428,7 +491,6 @@ if keyboard_check_released(vk_right)
     if cooldownTimers[6] &lt;= 0 &amp;&amp; comboing == false
     {
         attack = dir.no 
-        audio_play_sound(Slash, 1, false);   
     }
 }
 
@@ -512,6 +574,7 @@ if attack != dir.no &amp;&amp; comboing == false
         {
         instance_destroy()
         }
+    addTime(enemyTime)
     }
 }
 else if attack != dir.no
@@ -527,13 +590,13 @@ else if attack != dir.no
         {
         case dir.up:
             //up -&gt; right
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 90 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 90 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 90 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 90 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
             break
         case dir.down:
             //down -&gt; right
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], -90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], -90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], -90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) +180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], -90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) +180)
             break
         }
         break
@@ -543,13 +606,13 @@ else if attack != dir.no
         {
         case dir.right:
             //rigth -&gt; up
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) +180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) +180)
             break
         case dir.left:
             //left -&gt; up
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 180 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 180 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 180 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 180 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
             break
         }
         break
@@ -559,13 +622,13 @@ else if attack != dir.no
         {
         case dir.up:
             //up -&gt; left
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 90 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
             break
         case dir.down:
             //down -&gt; left
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 270 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 270 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 270 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 270 - 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
         }
         break
     
@@ -574,13 +637,13 @@ else if attack != dir.no
         {
         case dir.right:
             //right -&gt; down
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], -90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], -90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], -90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], -90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
             break
         case dir.left:
             //left -&gt; down
-            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 180 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
-            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 180 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)))
+            swordTipPos[X] = lengthdir_x(sUpEndPos[3], 180 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
+            swordTipPos[Y] = lengthdir_y(sUpEndPos[3], 180 + 90 * (1- cooldownTimers[6]/(attackDuration * room_speed)) + 180)
         }
         break    
     }
@@ -591,6 +654,7 @@ else if attack != dir.no
         {
         instance_destroy()
         }
+    addTime(enemyTime)
     }
 }
 
@@ -602,32 +666,45 @@ if attack == dir.no
 
 if cooldownTimers[6] == 0
 {
-    switch attack
+    if followUp != dir.no
     {
-    case dir.right:
-        if hold[dir.right] == false
+        prevAttack = attack
+        attack = followUp
+        comboing = true
+        followUp = dir.no 
+        cooldownTimers[6] = attackDuration * room_speed
+    }
+    else
+    {
+        comboing = false
+        switch attack
         {
-            attack = dir.no
-        }
-        break;
-    case dir.up:
-        if hold[dir.up] == false
-        {
-            attack = dir.no
-        }
-        break;
-    case dir.left:
-        if hold[dir.left] == false
-        {
-            attack = dir.no
-        }
-        break;
-    case dir.down:
-        if hold[dir.down] == false
-        {
-            attack = dir.no
+        case dir.right:
+            if hold[dir.right] == false
+            {
+                attack = dir.no
+            }
+            break;
+        case dir.up:
+            if hold[dir.up] == false
+            {
+                attack = dir.no
+            }
+            break;
+        case dir.left:
+            if hold[dir.left] == false
+            {
+                attack = dir.no
+            }
+            break;
+        case dir.down:
+            if hold[dir.down] == false
+            {
+                attack = dir.no
+            }    
         }
     }
+    
 }
 
 //gravity collision
@@ -637,6 +714,15 @@ if fallSpeed &gt;= 0
     if vCollision == noone
     {
         tempPosY += fallSpeed;
+    }
+    else if vCollision.halfTile
+    {
+        switch vCollision.orientation
+        {
+            case 0: 
+                tempPosY = vCollision.y - 1 *(x - vCollision.x) + 32
+                break
+        }
     }
     else
     {
@@ -657,10 +743,10 @@ else
     }
 }
 
-// vertical collision
+// horizontal collision
 if hSpeed &lt; 0
 {   
-    var vCollider = collision_line(x -10 + hSpeed, tempPosY - 11, x -10 + hSpeed, tempPosY + 11, obj_tile, false, false)
+    var vCollider = collision_line(x -10 + hSpeed, tempPosY - 11, x -10 + hSpeed, tempPosY + 11, obj_tile_full, false, false)
     if vCollider == noone
     {
         tempPosX += hSpeed
@@ -668,11 +754,12 @@ if hSpeed &lt; 0
     else
     {
         tempPosX = vCollider.x +32 +10
+        hSpeed = 0
     }
 }
 else if hSpeed &gt; 0
 {   
-    var vCollider = collision_line(x +10 + hSpeed, tempPosY - 11, x +10 + hSpeed, tempPosY + 11, obj_tile, false, false);
+    var vCollider = collision_line(x +10 + hSpeed, tempPosY - 11, x +10 + hSpeed, tempPosY + 11, obj_tile_full, false, false);
     if vCollider == noone
     {
         tempPosX += hSpeed
@@ -680,6 +767,7 @@ else if hSpeed &gt; 0
     else
     {
         tempPosX = vCollider.x - 11
+        hSpeed = 0
     }
 }
 

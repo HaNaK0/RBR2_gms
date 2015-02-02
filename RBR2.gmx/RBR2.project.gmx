@@ -4,37 +4,59 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound">
-    <sounds name="SFX">
-      <sound>sound\Jump</sound>
-      <sound>sound\Slash2</sound>
-      <sound>sound\Slash</sound>
-      <sound>sound\Slash3</sound>
-      <sound>sound\Step</sound>
-    </sounds>
-  </sounds>
+  <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_bob</sprite>
     <sprite>sprites\spr_block</sprite>
+    <sprite>sprites\spr_tile_half_NW</sprite>
     <sprite>sprites\spr_enemy</sprite>
+    <sprite>sprites\spr_goal</sprite>
   </sprites>
   <backgrounds name="background"/>
-  <paths name="paths"/>
+  <paths name="paths">
+    <paths name="path_H1">
+      <path>paths\path_H1_0</path>
+      <path>paths\path_H1_1</path>
+      <path>paths\path_H1_2</path>
+      <path>paths\path_H1_3</path>
+    </paths>
+  </paths>
+  <scripts name="scripts">
+    <script>scripts\addTime.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_bob</object>
     <objects name="tiles">
+      <object>objects\obj_tile_half_NW</object>
+      <object>objects\obj_tile_full</object>
       <object>objects\obj_tile</object>
     </objects>
     <objects name="debug">
       <object>objects\debug_print</object>
     </objects>
     <objects name="enemies">
-      <object>objects\obj_enemy</object>
+      <objects name="enemy_H1">
+        <object>objects\obj_enemy_H1_0</object>
+        <object>objects\obj_enemy_H1_1</object>
+        <object>objects\obj_enemy_H1_2</object>
+        <object>objects\obj_anemy_H1_3</object>
+      </objects>
+      <objects name="parents and templates">
+        <object>objects\obj_enemy</object>
+        <object>objects\obj_enemy_template</object>
+      </objects>
     </objects>
+    <objects name="ui">
+      <object>objects\ui_timer</object>
+    </objects>
+    <objects name="control">
+      <object>objects\ctrl_camera</object>
+    </objects>
+    <object>objects\obj_goal</object>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room1</room>
-    <room>rooms\Philip</room>
+    <room>rooms\rm_H1</room>
+    <room>rooms\room2</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

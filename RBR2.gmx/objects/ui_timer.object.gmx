@@ -25,7 +25,48 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.debug = true
+            <string>// main timer
+mainTimer = -1
+pause = false
+percentage = 0
+maxTime = 2 * 60
+startTime = 30
+
+mainTimer = startTime * room_speed
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// timer update
+if mainTimer &gt;= 0 &amp;&amp; !pause
+{
+    mainTimer -= 1
+}
+
+//game end
+if mainTimer == 0
+{
+    show_message("you lost")
+    game_end()
+}
 </string>
           </argument>
         </arguments>
@@ -48,44 +89,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_colour(c_black)
-draw_text(x,y, string(fps))
-draw_text(x,y + 16, string(ui_timer.percentage))
-draw_text(x,y + 16 * 2, string(ui_timer.mainTimer / room_speed))
-//draw_text(x,y + 16 * 2, string(obj_bob.cooldownTimers[6]))
-//draw_text(x,y + 16 * 3, string(obj_bob.attack))
- 
+            <string>percentage = mainTimer / (maxTime * room_speed)
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="80">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if ui_timer.pause
-{
-    ui_timer.pause = false;
-}
-else
-{
-    ui_timer.pause = true
-}
+draw_set_colour(merge_colour(c_red, c_green, percentage))
+
+draw_rectangle(0,view_hport[0] - 32, view_wport[0] *percentage, view_hport[0], false)
 </string>
           </argument>
         </arguments>
