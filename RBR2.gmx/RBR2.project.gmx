@@ -20,6 +20,13 @@
       <path>paths\path_H1_2</path>
       <path>paths\path_H1_3</path>
     </paths>
+    <paths name="path_SebbesRoom">
+      <path>paths\path_SebbesRoom_walk1</path>
+      <path>paths\path_SebbesRoom_walk2</path>
+      <path>paths\path_SebbesRoom_walk3</path>
+      <path>paths\path_SebbesRoom_walk4</path>
+      <path>paths\path_SebbesRoom_walk5</path>
+    </paths>
   </paths>
   <scripts name="scripts">
     <script>scripts\addTime.gml</script>
@@ -44,6 +51,14 @@
       <objects name="parents and templates">
         <object>objects\obj_enemy</object>
         <object>objects\obj_enemy_template</object>
+        <objects name="obj_SebbesRoom">
+          <object>objects\obj_enemy_walk1</object>
+          <object>objects\obj_enemy_walk2</object>
+          <object>objects\obj_enemy_walk3</object>
+          <object>objects\obj_enemy_walk4</object>
+          <object>objects\obj_enemy_walk5</object>
+          <object>objects\obj_enemy_still</object>
+        </objects>
       </objects>
     </objects>
     <objects name="ui">
@@ -51,10 +66,12 @@
     </objects>
     <objects name="control">
       <object>objects\ctrl_camera</object>
+      <object>objects\controll_room</object>
     </objects>
     <object>objects\obj_goal</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\SebbesRoom</room>
     <room>rooms\rm_H1</room>
     <room>rooms\room2</room>
   </rooms>
