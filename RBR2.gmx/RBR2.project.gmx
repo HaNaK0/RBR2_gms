@@ -4,7 +4,13 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sounds name="Audio">
+      <sound>sound\Jump</sound>
+      <sound>sound\Sword1</sound>
+      <sound>sound\Step</sound>
+    </sounds>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_bob</sprite>
     <sprite>sprites\spr_block</sprite>
@@ -12,13 +18,19 @@
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_goal</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\background0</background>
+  </backgrounds>
   <paths name="paths">
     <paths name="path_H1">
       <path>paths\path_H1_0</path>
       <path>paths\path_H1_1</path>
       <path>paths\path_H1_2</path>
       <path>paths\path_H1_3</path>
+    </paths>
+    <paths name="path_P1">
+      <path>paths\P1_Path1</path>
+      <path>paths\P1_Path2</path>
     </paths>
   </paths>
   <scripts name="scripts">
@@ -45,6 +57,10 @@
         <object>objects\obj_enemy</object>
         <object>objects\obj_enemy_template</object>
       </objects>
+      <objects name="Enemies_P1">
+        <object>objects\Enemy1_P1</object>
+        <object>objects\Enemy2_P1</object>
+      </objects>
     </objects>
     <objects name="ui">
       <object>objects\ui_timer</object>
@@ -55,8 +71,10 @@
     <object>objects\obj_goal</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_P1</room>
     <room>rooms\rm_H1</room>
     <room>rooms\room2</room>
+    <room>rooms\room3</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
