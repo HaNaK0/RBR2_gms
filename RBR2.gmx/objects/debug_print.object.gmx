@@ -50,7 +50,7 @@
             <kind>1</kind>
             <string>draw_set_colour(c_black)
 draw_text(x,y, string(fps))
-draw_text(x,y + 16, string(ui_timer.percentage))
+draw_text(x,y + 16, string(obj_bob.monsterCol))
 draw_text(x,y + 16 * 2, string(ui_timer.mainTimer / room_speed))
 //draw_text(x,y + 16 * 2, string(obj_bob.cooldownTimers[6]))
 //draw_text(x,y + 16 * 3, string(obj_bob.attack))

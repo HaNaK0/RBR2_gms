@@ -105,7 +105,9 @@ attackDuration =0.1
 attackHold = 0.5
 
 //speed when moving sideways
-mySpeed = 6;
+mySpeedSlowed = 3;
+mySpeedMax = 6;
+mySpeed = mySpeedMax;
 //sped currently moving veritcaly
 hSpeed = 0;
 // the speed your jump astarts at
@@ -178,6 +180,8 @@ sDownEndPos[0] = 0
 sDownEndPos[1] = 0
 sDownEndPos[2] = 0
 sDownEndPos[3] = 0
+
+monsterCol = false
 </string>
           </argument>
         </arguments>
@@ -423,6 +427,7 @@ if keyboard_check_pressed(vk_right) &amp;&amp; cooldownTimers[timers.attackR] &l
         cooldownTimers[6] = attackDuration * room_speed
         cooldownTimers[timers.attackR] = cooldownMain * room_speed
         hold[dir.right] = true
+        swordLock[dir.right] = true
     }
     else
     {
@@ -433,6 +438,7 @@ if keyboard_check_pressed(vk_right) &amp;&amp; cooldownTimers[timers.attackR] &l
             followUp = dir.right
             cooldownTimers[timers.attackR] = cooldownMain * room_speed
             hold[dir.right] = true
+            swordLock[dir.right] = true
             break;
         }
     }
@@ -446,6 +452,7 @@ else if keyboard_check_pressed(vk_up) &amp;&amp; cooldownTimers[timers.attackU] 
         cooldownTimers[7] = attackHold * room_speed
         cooldownTimers[timers.attackU] = cooldownMain * room_speed
         hold[dir.up] = true
+        swordLock[dir.up] = true
     }
     else
     {
@@ -456,6 +463,7 @@ else if keyboard_check_pressed(vk_up) &amp;&amp; cooldownTimers[timers.attackU] 
             followUp = dir.up
             cooldownTimers[timers.attackU] = cooldownMain * room_speed
             hold[dir.up] = true
+            swordLock[dir.up] = true
             break
         }
     }
@@ -469,6 +477,7 @@ else if keyboard_check_pressed(vk_left) &amp;&amp; cooldownTimers[timers.attackL
         cooldownTimers[7] = attackHold * room_speed
         cooldownTimers[timers.attackL] = cooldownMain * room_speed
         hold[dir.left] = true
+        swordLock[dir.left] = true
     }
     else
     {
@@ -479,6 +488,7 @@ else if keyboard_check_pressed(vk_left) &amp;&amp; cooldownTimers[timers.attackL
             followUp = dir.left
             cooldownTimers[timers.attackL] = cooldownMain * room_speed
             hold[dir.left] = true
+            swordLock[dir.left] = true
             break;
         }
     }
@@ -492,6 +502,7 @@ else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD
         cooldownTimers[7] = attackHold * room_speed
         cooldownTimers[timers.attackD] = cooldownMain * room_speed
         hold[dir.down] = true
+        swordLock[dir.down] = true
     }
     else
     {
@@ -502,6 +513,7 @@ else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD
             followUp = dir.down
             cooldownTimers[timers.attackD] = cooldownMain * room_speed
             hold[dir.down] = true
+            swordLock[dir.down] = true
             break;
         }
     }
@@ -802,6 +814,27 @@ else if hSpeed &gt; 0
     }
 }
 
+//enemy collision
+if collision_rectangle(x - 10, y - 11, x + 10, y + 11 , obj_enemy, true, true)
+{
+    mySpeed = mySpeedSlowed
+    monsterCol = true
+}
+else
+{
+    mySpeed = mySpeedMax
+    monsterCol = false
+}
+
+// reseting sword
+if !isFalling
+{
+    for(i = 1; i &lt; 5; i++)
+    {
+         swordLock[i] = false
+    } 
+}
+
 //movement execution
 //all movement is executed here
 x = tempPosX
@@ -839,6 +872,8 @@ if global.debug
     {
         draw_line(x + swordHiltPos[X],y + swordHiltPos[Y],x + swordTipPos[X],y + swordTipPos[Y])
     }
+    
+    draw_rectangle(x - 10, y - 11, x + 10, y + 11, true)
 }
 </string>
           </argument>
