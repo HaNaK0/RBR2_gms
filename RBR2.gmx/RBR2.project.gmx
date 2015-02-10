@@ -32,6 +32,9 @@
       <path>paths\P1_Path1</path>
       <path>paths\P1_Path2</path>
     </paths>
+    <paths name="path_P2">
+      <path>paths\P2_path1</path>
+    </paths>
   </paths>
   <scripts name="scripts">
     <script>scripts\addTime.gml</script>
@@ -61,6 +64,9 @@
         <object>objects\Enemy1_P1</object>
         <object>objects\Enemy2_P1</object>
       </objects>
+      <objects name="Enemies_P2">
+        <object>objects\Enemy1_P2</object>
+      </objects>
     </objects>
     <objects name="ui">
       <object>objects\ui_timer</object>
@@ -71,6 +77,7 @@
     <object>objects\obj_goal</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_P2</room>
     <room>rooms\rm_P1</room>
     <room>rooms\rm_H1</room>
     <room>rooms\room2</room>
