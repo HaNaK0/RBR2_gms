@@ -161,6 +161,8 @@ swordTipPos[1] = 0
 */
 
 
+//animation end position
+
 sRightEndPos[0] = 0
 sRightEndPos[1] = 0
 sRightEndPos[2] = 32
@@ -181,7 +183,11 @@ sDownEndPos[1] = 0
 sDownEndPos[2] = 0
 sDownEndPos[3] = 0
 
+// keeping track oif colliding with monster
 monsterCol = false
+
+//time lost per step from standing in monster
+timeLoss = 0.3 //seconds
 </string>
           </argument>
         </arguments>
@@ -328,6 +334,7 @@ else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.RIGHT
     hSpeed = -wallJump
 }
 
+// attack lunge 
 if cooldownTimers[6] &gt; 0
 {
     switch attack
@@ -347,7 +354,7 @@ if cooldownTimers[6] &gt; 0
     }
 }
 
-//lef/right input
+//input left and right
 if keyboard_check(ord('A'))
 {
     
@@ -415,10 +422,8 @@ else
     }
 }
 
-// drag calculation
-
-
 //attack
+//attacking right
 if keyboard_check_pressed(vk_right) &amp;&amp; cooldownTimers[timers.attackR] &lt;= 0 &amp;&amp; !swordLock[dir.right]
 {
     if attack ==  dir.no
@@ -443,6 +448,7 @@ if keyboard_check_pressed(vk_right) &amp;&amp; cooldownTimers[timers.attackR] &l
         }
     }
 }
+//attacking upwards
 else if keyboard_check_pressed(vk_up) &amp;&amp; cooldownTimers[timers.attackU] &lt;= 0 &amp;&amp; !swordLock[dir.up] &amp;&amp; isFalling
 {
     if attack == dir.no
@@ -468,6 +474,7 @@ else if keyboard_check_pressed(vk_up) &amp;&amp; cooldownTimers[timers.attackU] 
         }
     }
 }
+//attacking left
 else if keyboard_check_pressed(vk_left) &amp;&amp; cooldownTimers[timers.attackL] &lt;= 0 &amp;&amp; !swordLock[dir.left]
 {
     if attack == dir.no
@@ -493,6 +500,7 @@ else if keyboard_check_pressed(vk_left) &amp;&amp; cooldownTimers[timers.attackL
         }
     }
 }
+//attacking left
 else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD] &lt;= 0 &amp;&amp; isFalling &amp;&amp; swordLock[dir.down]
 {
     if attack == dir.no
@@ -522,7 +530,7 @@ else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD
 
 
 //attack keys released
-if keyboard_check_released(vk_right)
+if keyboard_check_released(vk_right)//right
 {
     hold[dir.right] = false
     if cooldownTimers[6] &lt;= 0 &amp;&amp; comboing == false
@@ -531,7 +539,7 @@ if keyboard_check_released(vk_right)
     }
 }
 
-if keyboard_check_released(vk_up)
+if keyboard_check_released(vk_up)//up
 {
     hold[dir.up] = false
     if cooldownTimers[6] &lt;= 0 &amp;&amp; comboing == false
@@ -540,7 +548,7 @@ if keyboard_check_released(vk_up)
     }
 }
 
-if keyboard_check_released(vk_left)
+if keyboard_check_released(vk_left)// left
 {
     hold[dir.left] = false
     if cooldownTimers[6] &lt;= 0 &amp;&amp; comboing == false
@@ -549,7 +557,7 @@ if keyboard_check_released(vk_left)
     }
 }
 
-if keyboard_check_released(vk_down)
+if keyboard_check_released(vk_down) //down
 {
     hold[dir.down] = false
     if cooldownTimers[6] &lt;= 0 &amp;&amp; comboing == false
@@ -604,14 +612,13 @@ if attack != dir.no &amp;&amp; comboing == false
     }
     
     // enemy gets destoryed and time is gven to player
-    //todo: implement timer and add time to it
     if hitEnemy != noone
     {
         with(hitEnemy)
         {
         instance_destroy()
         }
-    addTime(enemyTime)
+    addTime(enemyTime) //timer ad time script
     }
 }
 else if attack != dir.no
@@ -818,6 +825,7 @@ else if hSpeed &gt; 0
 if collision_rectangle(x - 10, y - 11, x + 10, y + 11 , obj_enemy, true, true)
 {
     mySpeed = mySpeedSlowed
+    addTime(-timeLoss)
     monsterCol = true
 }
 else
