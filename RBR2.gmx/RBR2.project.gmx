@@ -83,13 +83,10 @@
     </objects>
   </objects>
   <rooms name="rooms">
-<<<<<<< HEAD
-    <room>rooms\rm_H1</room>
-=======
     <room>rooms\Menu</room>
->>>>>>> pr/6
-    <room>rooms\rm_P2</room>
+    <room>rooms\rm_H1</room>
     <room>rooms\rm_P1</room>
+    <room>rooms\rm_P2</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
