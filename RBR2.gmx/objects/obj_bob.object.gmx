@@ -188,6 +188,27 @@ monsterCol = false
 
 //time lost per step from standing in monster
 timeLoss = 0.3 //seconds
+
+bobDir = dir.right
+
+enum state {
+    idle_1,
+    idle_2,
+    runing,
+}
+
+bobState = state.idle_1
+
+//animation variables
+
+//animation speed
+animSp = 24 // fps
+
+//current showing frame
+currentFrame = 0
+
+//animation timers
+animUpdateTim = 0
 </string>
           </argument>
         </arguments>
@@ -221,8 +242,14 @@ if distance_to_object(obj_goal) &lt; 32
 {
     if collision_rectangle(x - 10, y - 11, x + 10, y - 11, obj_goal, false, true) != noone
     {
-        show_message("you won")
-        game_end()
+        if room == room_last
+        {
+            room_goto(room_first)
+        }
+        else
+        {
+            room_goto_next()
+        }
     }
 }
 
@@ -234,7 +261,7 @@ if keyboard_check(vk_escape)
 
 // fall check
 //checks if bob is standing on a tile and sets isFalling to false if he is
-if  collision_line(x - 10, y + 12, x + 10, y + 12, obj_tile, false, false) != noone
+if  collision_line(x - 10, y + 16, x + 10, y + 16, obj_tile, false, false) != noone
 {
     isFalling = false
 }
@@ -357,7 +384,7 @@ if cooldownTimers[6] &gt; 0
 //input left and right
 if keyboard_check(ord('A'))
 {
-    
+    bobDir = dir.left
     if hSpeed &gt; -mySpeed
     { 
 
@@ -373,7 +400,7 @@ if keyboard_check(ord('A'))
 }
 else if keyboard_check(ord('D'))
 {
-    
+    bobDir = dir.right
     if hSpeed &lt; mySpeed
     {
         if isFalling
@@ -420,6 +447,16 @@ else
             hSpeed = 0
         }
     }
+}
+
+// bob animation state runing or idle
+if hSpeed != 0
+{
+    bobState = state.runing
+}
+else
+{
+    bobState = state.idle_1
 }
 
 //attack
@@ -757,10 +794,30 @@ if cooldownTimers[7] == 0
     
 }
 
+if collision_rectangle(x - 10, y - 11, x + 10, y + 11 , obj_enemy, true, true)
+{
+    mySpeed = mySpeedSlowed
+    addTime(-timeLoss)
+    monsterCol = true
+    if hSpeed &gt; mySpeedSlowed
+    {
+        hSpeed = mySpeedSlowed
+    }
+    else if hSpeed &lt; -mySpeedSlowed
+    {
+        hSpeed = -mySpeedSlowed
+    }
+}
+else
+{
+    mySpeed = mySpeedMax
+    monsterCol = false
+}
+
 //gravity collision
 if fallSpeed &gt;= 0
 {
-    var vCollision = collision_line(x - 10, y + 12 + fallSpeed, x + 10, y + 12 + fallSpeed, obj_tile, false, false);
+    var vCollision = collision_line(x - 10, y + 16 + fallSpeed, x + 10, y + 16 + fallSpeed, obj_tile, false, false);
     if vCollision == noone
     {
         tempPosY += fallSpeed;
@@ -776,19 +833,19 @@ if fallSpeed &gt;= 0
     }
     else
     {
-        tempPosY = vCollision.y -12 
+        tempPosY = vCollision.y -16 
     }
 }
 else
 {
-    var vCollision = collision_line(x - 10, y - 12 + fallSpeed, x + 10, y - 12 + fallSpeed, obj_tile, false, false);
+    var vCollision = collision_line(x - 10, y - 16 + fallSpeed, x + 10, y - 16 + fallSpeed, obj_tile, false, false);
     if vCollision == noone
     {
         tempPosY += fallSpeed;
     }
     else
     {
-        tempPosY = vCollision.y +12 +32
+        tempPosY = vCollision.y +16 +32
         fallSpeed = 0;
     }
 }
@@ -796,7 +853,7 @@ else
 // horizontal collision
 if hSpeed &lt; 0
 {   
-    var vCollider = collision_line(x -10 + hSpeed, tempPosY - 11, x -10 + hSpeed, tempPosY + 11, obj_tile_full, false, false)
+    var vCollider = collision_line(x -10 + hSpeed, tempPosY - 15, x -10 + hSpeed, tempPosY + 15, obj_tile_full, false, false)
     if vCollider == noone
     {
         tempPosX += hSpeed
@@ -809,7 +866,7 @@ if hSpeed &lt; 0
 }
 else if hSpeed &gt; 0
 {   
-    var vCollider = collision_line(x +10 + hSpeed, tempPosY - 11, x +10 + hSpeed, tempPosY + 11, obj_tile_full, false, false);
+    var vCollider = collision_line(x +10 + hSpeed, tempPosY - 15, x +10 + hSpeed, tempPosY + 15, obj_tile_full, false, false);
     if vCollider == noone
     {
         tempPosX += hSpeed
@@ -821,18 +878,6 @@ else if hSpeed &gt; 0
     }
 }
 
-//enemy collision
-if collision_rectangle(x - 10, y - 11, x + 10, y + 11 , obj_enemy, true, true)
-{
-    mySpeed = mySpeedSlowed
-    addTime(-timeLoss)
-    monsterCol = true
-}
-else
-{
-    mySpeed = mySpeedMax
-    monsterCol = false
-}
 
 // reseting sword
 if !isFalling
@@ -869,7 +914,8 @@ y = tempPosY
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>image_speed = 0
+draw_self()
 
 //drawing sword collision line
 //Only for bugtesting
@@ -883,6 +929,8 @@ if global.debug
     
     draw_rectangle(x - 10, y - 11, x + 10, y + 11, true)
 }
+
+
 </string>
           </argument>
         </arguments>
