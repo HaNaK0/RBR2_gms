@@ -28,21 +28,23 @@
       <path>paths\path_H1_2</path>
       <path>paths\path_H1_3</path>
     </paths>
-<<<<<<< HEAD
     <paths name="path_SebbesRoom">
       <path>paths\path_SebbesRoom_walk1</path>
       <path>paths\path_SebbesRoom_walk2</path>
       <path>paths\path_SebbesRoom_walk3</path>
       <path>paths\path_SebbesRoom_walk4</path>
       <path>paths\path_SebbesRoom_walk5</path>
-=======
+      <path>paths\path_SebbesRoom_walk7</path>
+      <path>paths\path_SebbesRoom_walk6</path>
+      <path>paths\path_SebbesRoom_walk8</path>
+      <path>paths\path_SebbesRoom_walk9</path>
+    </paths>
     <paths name="path_P1">
       <path>paths\P1_Path1</path>
       <path>paths\P1_Path2</path>
     </paths>
     <paths name="path_P2">
       <path>paths\P2_path1</path>
->>>>>>> pr/2
     </paths>
   </paths>
   <scripts name="scripts">
@@ -74,6 +76,11 @@
           <object>objects\obj_enemy_walk3</object>
           <object>objects\obj_enemy_walk4</object>
           <object>objects\obj_enemy_walk5</object>
+          <object>objects\obj_enemy_walk6</object>
+          <object>objects\obj_enemy_walk7</object>
+          <object>objects\obj_enemy_walk8</object>
+          <object>objects\obj_enemy_walk9</object>
+          <object>objects\obj_enemy_walk10</object>
           <object>objects\obj_enemy_still</object>
         </objects>
       </objects>
@@ -95,12 +102,9 @@
     <object>objects\obj_goal</object>
   </objects>
   <rooms name="rooms">
-<<<<<<< HEAD
     <room>rooms\SebbesRoom</room>
-=======
     <room>rooms\rm_P2</room>
     <room>rooms\rm_P1</room>
->>>>>>> pr/2
     <room>rooms\rm_H1</room>
     <room>rooms\room2</room>
     <room>rooms\room3</room>
