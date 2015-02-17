@@ -29,7 +29,7 @@
 mainTimer = -1
 pause = false
 percentage = 0
-maxTime = 2 * 60
+maxTime = 60
 startTime = 30
 
 mainTimer = startTime * room_speed
