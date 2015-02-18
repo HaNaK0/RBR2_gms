@@ -26,6 +26,21 @@
           <argument>
             <kind>1</kind>
             <string>halfTile = false
+/*
+//set center position
+centerPosX = x + 16
+centerPosY = y + 16
+
+//check tiles in all directions
+nTiles[0] = collision_point(centerPosX + 32, centerPosY, obj_tile, false, true) //E
+nTiles[1] = collision_point(centerPosX + 32, centerPosY + 32, obj_tile, false, true) //SE
+nTiles[2] = collision_point(centerPosX, centerPosY + 32, obj_tile, false, true) //S
+nTiles[3] = collision_point(centerPosX - 32, centerPosY + 32, obj_tile, false, true) //SW
+nTiles[4] = collision_point(centerPosX - 32, centerPosY, obj_tile, false, true) //W
+nTiles[5] = collision_point(centerPosX - 32, centerPosY - 32, obj_tile, false, true) //NW
+nTiles[6] = collision_point(centerPosX, centerPosY - 32, obj_tile, false, true) //N
+nTiles[7] = collision_point(centerPosX + 32, centerPosY - 32, obj_tile, false, true) //NE
+*/
 </string>
           </argument>
         </arguments>

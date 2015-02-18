@@ -233,9 +233,7 @@ mySprite = spr_bob_right
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-
-//setting up the variables to keep wher the new object will end up
+            <string>//setting up the variables to keep wher the new object will end up
 var tempPosX = x
 var tempPosY = y
 
@@ -452,6 +450,10 @@ else
 }
 
 // bob animation state runing or idle
+if isFalling
+{
+    
+}
 if hSpeed != 0
 {
     bobState = state.runing
