@@ -12,13 +12,20 @@
     </sounds>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\spr_bob</sprite>
-    <sprite>sprites\spr_block</sprite>
-    <sprite>sprites\spr_tile_half_NW</sprite>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_goal</sprite>
-    <sprite>sprites\spr_start</sprite>
-    <sprite>sprites\spr_controls</sprite>
+    <sprites name="spr_bob">
+      <sprite>sprites\spr_bob_left</sprite>
+      <sprite>sprites\spr_bob_right</sprite>
+    </sprites>
+    <sprites name="spr_block">
+      <sprite>sprites\spr_block</sprite>
+      <sprite>sprites\spr_tile_half_NW</sprite>
+    </sprites>
+    <sprites name="menu">
+      <sprite>sprites\spr_controls</sprite>
+      <sprite>sprites\spr_start</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

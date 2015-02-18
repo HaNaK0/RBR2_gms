@@ -62,10 +62,10 @@ if mainTimer &gt;= 0 &amp;&amp; !pause
 }
 
 //game end
-if mainTimer == 0
+if mainTimer &lt;= 0
 {
-    show_message("you lost")
-    game_end()
+    show_message("time's up")
+    room_goto(room_first)
 }
 </string>
           </argument>
