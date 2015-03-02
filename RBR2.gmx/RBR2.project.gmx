@@ -26,9 +26,10 @@
       <sprite>sprites\spr_controls</sprite>
       <sprite>sprites\spr_start</sprite>
     </sprites>
+    <sprite>sprites\spr_loading</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\background0</background>
+    <background>background\ts_first</background>
   </backgrounds>
   <paths name="paths">
     <paths name="path_H1">
@@ -47,6 +48,7 @@
   </paths>
   <scripts name="scripts">
     <script>scripts\addTime.gml</script>
+    <script>scripts\loadTile.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_bob</object>
@@ -88,12 +90,13 @@
       <object>objects\obj_start</object>
       <object>objects\obj_controls</object>
     </objects>
+    <object>objects\obj_loading</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Menu</room>
+    <room>rooms\rm_P2</room>
     <room>rooms\rm_H1</room>
     <room>rooms\rm_P1</room>
-    <room>rooms\rm_P2</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

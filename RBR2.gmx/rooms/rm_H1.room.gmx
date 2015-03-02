@@ -750,6 +750,7 @@
     <instance objName="obj_enemy_H1_2" x="864" y="704" name="inst_6EE6A094" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_anemy_H1_3" x="960" y="704" name="inst_816B4BD5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_goal" x="1248" y="416" name="inst_3572DE7F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_tile_full" x="224" y="1376" name="inst_0D44DB71" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
