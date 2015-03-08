@@ -91,6 +91,7 @@
       <object>objects\obj_controls</object>
     </objects>
     <object>objects\obj_loading</object>
+    <object>objects\ctrl_tile</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\Menu</room>
