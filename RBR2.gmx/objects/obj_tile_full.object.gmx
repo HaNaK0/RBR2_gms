@@ -26,6 +26,59 @@
           <argument>
             <kind>1</kind>
             <string>halfTile = false
+
+//the neighbors that exist
+textureIndex = 0;
+
+if collision_point(x +16 + 32, y +16, obj_tile, false, true) != noone //E
+{
+    textureIndex += 1
+    // adds 1
+}
+
+if collision_point(x +16, y +16 + 32, obj_tile, false, true) != noone //S
+{
+    textureIndex += 2
+    // adds 2
+}
+
+if collision_point(x +16 - 32, y +16, obj_tile, false, true) != noone //W
+{
+    textureIndex += 4
+    // adds 4
+}
+
+if collision_point(x +16, y +16 - 32, obj_tile, false, true) != noone //N
+{
+    textureIndex += 8
+    // adds 8
+}
+
+if collision_point(x +16 + 32, y +16 + 32, obj_tile, false, true) != noone //SE
+{
+    textureIndex += 16
+    // adds 16
+}
+
+if collision_point(x +16 - 32, y +16 + 32, obj_tile, false, true) != noone//SW
+{
+    textureIndex += 32
+    // adds 32
+}
+
+if collision_point(x +16 - 32, y +16 - 32, obj_tile, false, true) != noone //NW
+{
+     textureIndex += 64
+     // adds 64
+}
+
+if collision_point(x +16 + 32, y +16 - 32, obj_tile, false, true) != noone //NE
+{
+    textureIndex += 128
+    // adds 128
+}
+
+tile_add(ts_first, global.tsTiles[# textureIndex, 0], global.tsTiles[# textureIndex, 1], global.tsTiles[# textureIndex, 2], global.tsTiles[# textureIndex, 3], x + global.tsTiles[# textureIndex, 4], y + global.tsTiles[# textureIndex, 5], -3);
 </string>
           </argument>
         </arguments>

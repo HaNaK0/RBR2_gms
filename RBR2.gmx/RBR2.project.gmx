@@ -12,14 +12,24 @@
     </sounds>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\spr_bob</sprite>
-    <sprite>sprites\spr_block</sprite>
-    <sprite>sprites\spr_tile_half_NW</sprite>
     <sprite>sprites\spr_enemy</sprite>
     <sprite>sprites\spr_goal</sprite>
+    <sprites name="spr_bob">
+      <sprite>sprites\spr_bob_left</sprite>
+      <sprite>sprites\spr_bob_right</sprite>
+    </sprites>
+    <sprites name="spr_block">
+      <sprite>sprites\spr_block</sprite>
+      <sprite>sprites\spr_tile_half_NW</sprite>
+    </sprites>
+    <sprites name="menu">
+      <sprite>sprites\spr_controls</sprite>
+      <sprite>sprites\spr_start</sprite>
+    </sprites>
+    <sprite>sprites\spr_loading</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\background0</background>
+    <background>background\ts_first</background>
   </backgrounds>
   <paths name="paths">
     <paths name="path_H1">
@@ -49,6 +59,7 @@
   </paths>
   <scripts name="scripts">
     <script>scripts\addTime.gml</script>
+    <script>scripts\loadTile.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_bob</object>
@@ -100,14 +111,22 @@
       <object>objects\controll_room</object>
     </objects>
     <object>objects\obj_goal</object>
+    <objects name="menu">
+      <object>objects\obj_start</object>
+      <object>objects\obj_controls</object>
+    </objects>
+    <object>objects\obj_loading</object>
+    <object>objects\ctrl_tile</object>
   </objects>
   <rooms name="rooms">
+<<<<<<< HEAD
     <room>rooms\SebbesRoom</room>
+=======
+    <room>rooms\Menu</room>
+>>>>>>> pr/3
     <room>rooms\rm_P2</room>
-    <room>rooms\rm_P1</room>
     <room>rooms\rm_H1</room>
-    <room>rooms\room2</room>
-    <room>rooms\room3</room>
+    <room>rooms\rm_P1</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
