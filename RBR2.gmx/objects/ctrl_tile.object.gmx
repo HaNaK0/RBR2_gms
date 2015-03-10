@@ -81,6 +81,10 @@ for (i = 0; i &lt; 255; i++)
     case 1 + 16 + 32 + 64:
     case 1 + 32 + 64 + 128:
     case 1 + 16 + 32 + 64 + 128:
+    case 1 + 32 + 64:
+    case 1 + 16 + 128:
+    case 1 + 16 + 64 + 128:
+    case 1 + 16 + 32 + 128:
         //Left side (86, 43 - 34 * 32)
         //todo add left end
         global.tsTiles[# i, 0] = 86 //top
@@ -102,6 +106,10 @@ for (i = 0; i &lt; 255; i++)
     case 2 + 16 + 32 + 64:
     case 2 + 32 + 64 + 128:
     case 2 + 16 + 32 + 64 + 128:
+    case 2 + 32 + 64:
+    case 2 + 16 + 128:
+    case 2 + 16 + 64 + 128:
+    case 2 + 16 + 32 + 128:
         //Uper side (45, 83 - 32 * 34)
         //todo add top end
         global.tsTiles[# i, 0] = 45 //top
@@ -123,6 +131,10 @@ for (i = 0; i &lt; 255; i++)
     case 4 + 16 + 32 + 64:
     case 4 + 32 + 64 + 128:
     case 4 + 16 + 32 + 64 + 128:
+    case 4 + 32 + 64:
+    case 4 + 16 + 128:
+    case 4 + 16 + 64 + 128:
+    case 4 + 16 + 32 + 128:
         //Right side (0, 43 - 34 * 32)
         //todo add right end
         global.tsTiles[# i, 0] = 0 //top
@@ -144,6 +156,10 @@ for (i = 0; i &lt; 255; i++)
     case 8 + 16 + 32 + 64:
     case 8 + 32 + 64 + 128:
     case 8 + 16 + 32 + 64 + 128:
+    case 8 + 32 + 64:
+    case 8 + 16 + 128:
+    case 8 + 16 + 64 + 128:
+    case 8 + 16 + 32 + 128:
         //Right side (0, 43 - 34 * 32)
         //todo add right end
         global.tsTiles[# i, 0] = 0 //top
@@ -165,6 +181,10 @@ for (i = 0; i &lt; 255; i++)
     case 5 + 16 + 32 + 64:
     case 5 + 32 + 64 + 128:
     case 5 + 16 + 32 + 64 + 128:
+    case 5 + 32 + 64:
+    case 5 + 16 + 128:
+    case 5 + 16 + 64 + 128:
+    case 5 + 16 + 32 + 128:
         //Uper side (45, 83 - 32 * 34)
         //todo add horisontal
         global.tsTiles[# i, 0] = 45 //top
@@ -186,6 +206,10 @@ for (i = 0; i &lt; 255; i++)
     case 10 + 16 + 32 + 64:
     case 10 + 32 + 64 + 128:
     case 10 + 16 + 32 + 64 + 128:
+    case 10 + 32 + 64:
+    case 10 + 16 + 128:
+    case 10 + 16 + 64 + 128:
+    case 10 + 16 + 32 + 128:
         //Right side (0, 43 - 34 * 32)
         //todo add right end
         global.tsTiles[# i, 0] = 0 //top
@@ -199,14 +223,10 @@ for (i = 0; i &lt; 255; i++)
     case 3 + 128:
     case 3 + 64:
     case 3 + 16:
-    //case 3 + 32:
     case 3 + 128 + 64:
-    //case 3 + 32 + 16:
-    //case 3 + 32 + 128:
     case 3 + 16 + 64:
-    //case 3 + 16 + 32 + 64:
-    //case 3 + 32 + 64 + 128:
-    //case 3 + 16 + 32 + 64 + 128:
+    case 3 + 16 + 128:
+    case 3 + 16 + 64 + 128:
         //Left upper corner (0, 129  -  34 * 34)
         //todo add bend
         global.tsTiles[# i, 0] = 0 //top
@@ -216,6 +236,272 @@ for (i = 0; i &lt; 255; i++)
         global.tsTiles[# i, 4] = -2 // x
         global.tsTiles[# i, 5] = -2 // y
         break
+    case 3 + 32:
+    case 3 + 32 + 16:
+    case 3 + 32 + 128:
+    case 3 + 16 + 32 + 64:
+    case 3 + 32 + 64 + 128:
+    case 3 + 16 + 32 + 64 + 128:
+    case 3 + 32 + 64:
+    case 3 + 16 + 32 + 128:
+        //Left upper corner (0, 129  -  34 * 34)
+        global.tsTiles[# i, 0] = 0 //top
+        global.tsTiles[# i, 1] = 129 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = -2 // x
+        global.tsTiles[# i, 5] = -2 // y
+        break
+    case 6:
+    case 6 + 128:
+    case 6 + 16:
+    case 6 + 32:
+    case 6 + 32 + 16:
+    case 6 + 32 + 128:
+    case 6 + 16 + 128:
+    case 6 + 16 + 32 + 128:
+        //Right upper corner (54, 129 - 34 * 34)
+        //todo add bend
+        global.tsTiles[# i, 0] = 54 //top
+        global.tsTiles[# i, 1] = 129 // left
+        global.tsTiles[# i, 2] = 32 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = -2 // y
+        break
+    case 6 + 64:
+    case 6 + 128 + 64:
+    case 6 + 16 + 64:
+    case 6 + 16 + 32 + 64:
+    case 6 + 32 + 64 + 128:
+    case 6 + 16 + 32 + 64 + 128:
+    case 6 + 32 + 64:
+    case 6 + 16 + 64 + 128:
+        //Right upper corner (54, 129 - 34 * 34)
+        global.tsTiles[# i, 0] = 54 //top
+        global.tsTiles[# i, 1] = 129 // left
+        global.tsTiles[# i, 2] = 32 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = -2 // y
+        break
+    case 12:
+    case 12 + 64:
+    case 12 + 16:
+    case 12 + 32:    
+    case 12 + 32 + 16:
+    case 12 + 16 + 64:
+    case 12 + 16 + 32 + 64:
+    case 12 + 32 + 64:
+        //Right lower corner (54 ,  177 - 34 * 34)
+        //todo add bend
+        global.tsTiles[# i, 0] = 54 //top
+        global.tsTiles[# i, 1] = 177 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 12 + 128:
+    case 12 + 128 + 64:
+    case 12 + 32 + 128:
+    case 12 + 32 + 64 + 128:
+    case 12 + 16 + 32 + 64 + 128:
+    case 12 + 16 + 128:
+    case 12 + 16 + 64 + 128:
+    case 12 + 16 + 32 + 128:
+        //Right lower corner (54 ,  177 - 34 * 34)
+        global.tsTiles[# i, 0] = 54 //top
+        global.tsTiles[# i, 1] = 177 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 9:
+    case 9 + 128:
+    case 9 + 64:
+    case 9 + 32:
+    case 9 + 128 + 64:
+    case 9 + 32 + 128:
+    case 9 + 32 + 64 + 128:
+    case 9 + 32 + 64:
+        //Left lower corner (0,  177 - 34 * 34)
+        //todo add bend
+        global.tsTiles[# i, 0] = 0 //top
+        global.tsTiles[# i, 1] = 177 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = -2 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 9 + 16:
+    case 9 + 32 + 16:
+    case 9 + 16 + 64:
+    case 9 + 16 + 32 + 64:
+    case 9 + 16 + 32 + 64 + 128:
+    case 9 + 16 + 128:
+    case 9 + 16 + 64 + 128:
+    case 9 + 16 + 32 + 128:
+        //Left lower corner (0,  177 - 34 * 34)
+        global.tsTiles[# i, 0] = 0 //top
+        global.tsTiles[# i, 1] = 177 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = -2 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 11:
+    case 11 + 128:
+    case 11 + 64:
+    case 11 + 128 + 64:
+        //Left side (86, 43 - 34 * 32)
+        // todo change
+        global.tsTiles[# i, 0] = 86 //top
+        global.tsTiles[# i, 1] = 43 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 32 // height
+        global.tsTiles[# i, 4] = -2 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 11 + 32:
+    case 11 + 32 + 128:
+    case 11 + 32 + 64:
+    case 11 + 32 + 64 + 128:
+        //Left side (86, 43 - 34 * 32)
+        //todo change
+        global.tsTiles[# i, 0] = 86 //top
+        global.tsTiles[# i, 1] = 43 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 32 // height
+        global.tsTiles[# i, 4] = -2 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 11 + 16:
+    case 11 + 16 + 64:
+    case 11 + 16 + 128:
+    case 11 + 16 + 64 + 128:
+        //Left side (86, 43 - 34 * 32)
+        //todo change
+        global.tsTiles[# i, 0] = 86 //top
+        global.tsTiles[# i, 1] = 43 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 32 // height
+        global.tsTiles[# i, 4] = -2 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 11 + 32 + 16:
+    case 11 + 16 + 32 + 64:
+    case 11 + 16 + 32 + 128:
+    case 11 + 16 + 32 + 64 + 128:
+        //Left side (86, 43 - 34 * 32)
+        global.tsTiles[# i, 0] = 86 //top
+        global.tsTiles[# i, 1] = 43 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 32 // height
+        global.tsTiles[# i, 4] = -2 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 7:
+    case 7 + 128:
+    case 7 + 16:
+    case 7 + 16 + 128:
+        //Uper side (45, 83 - 32 * 34)
+        //todo change to T
+        global.tsTiles[# i, 0] = 45 //top
+        global.tsTiles[# i, 1] = 83 // left
+        global.tsTiles[# i, 2] = 32 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = -2 // y
+        break
+    case 7 + 64:
+    case 7 + 128 + 64:
+    case 7 + 16 + 64:
+    case 7 + 16 + 64 + 128:
+        //Uper side (45, 83 - 32 * 34)
+        //todo change to T
+        global.tsTiles[# i, 0] = 45 //top
+        global.tsTiles[# i, 1] = 83 // left
+        global.tsTiles[# i, 2] = 32 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = -2 // y
+        break
+    case 7 + 32:
+    case 7 + 32 + 128:
+    case 7 + 16 + 32 + 128:
+        //Uper side (45, 83 - 32 * 34)
+        //todo change to T
+        global.tsTiles[# i, 0] = 45 //top
+        global.tsTiles[# i, 1] = 83 // left
+        global.tsTiles[# i, 2] = 32 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = -2 // y
+        break
+    case 7 + 16 + 32 + 64:
+    case 7 + 32 + 64 + 128:
+    case 7 + 16 + 32 + 64 + 128:
+    case 7 + 32 + 64:
+    case 7 + 32 + 16:
+        //Uper side (45, 83 - 32 * 34)
+        global.tsTiles[# i, 0] = 45 //top
+        global.tsTiles[# i, 1] = 83 // left
+        global.tsTiles[# i, 2] = 32 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = -2 // y
+        break
+    case 14:
+    case 14 + 128:
+    case 14 + 64:
+    case 14 + 16:
+    case 14 + 32:
+    case 14 + 128 + 64:
+    case 14 + 32 + 16:
+    case 14 + 32 + 128:
+    case 14 + 16 + 64:
+    case 14 + 16 + 32 + 64:
+    case 14 + 32 + 64 + 128:
+    case 14 + 16 + 32 + 64 + 128:
+    case 14 + 32 + 64:
+    case 14 + 16 + 128:
+    case 14 + 16 + 64 + 128:
+    case 14 + 16 + 32 + 128:
+        //Right side (0, 43 - 34 * 32)
+        global.tsTiles[# i, 0] = 0 //top
+        global.tsTiles[# i, 1] = 43 // left
+        global.tsTiles[# i, 2] = 34 // width
+        global.tsTiles[# i, 3] = 32 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+    case 13:
+    case 13 + 128:
+    case 13 + 64:
+    case 13 + 16:
+    case 13 + 32:
+    case 13 + 128 + 64:
+    case 13 + 32 + 16:
+    case 13 + 32 + 128:
+    case 13 + 16 + 64:
+    case 13 + 16 + 32 + 64:
+    case 13 + 32 + 64 + 128:
+    case 13 + 16 + 32 + 64 + 128:
+    case 13 + 32 + 64:
+    case 13 + 16 + 128:
+    case 13 + 16 + 64 + 128:
+    case 13 + 16 + 32 + 128:
+        //Underside (45, 0 - 32 * 34)
+        global.tsTiles[# i, 0] = 45 //top
+        global.tsTiles[# i, 1] = 0 // left
+        global.tsTiles[# i, 2] = 32 // width
+        global.tsTiles[# i, 3] = 34 // height
+        global.tsTiles[# i, 4] = 0 // x
+        global.tsTiles[# i, 5] = 0 // y
+        break
+        
     default:
         global.tsTiles[# i, 0] = 0
         global.tsTiles[# i, 1] = 0

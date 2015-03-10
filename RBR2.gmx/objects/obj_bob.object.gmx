@@ -144,7 +144,7 @@ wallJump = 8
 wallRelDel = false
 
 //lunge speed
-lungeSpeed = 12
+lungeSpeed = 8
 
 //sword position
 swordHiltPos[0] = 0

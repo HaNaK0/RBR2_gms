@@ -30,6 +30,7 @@
   </sprites>
   <backgrounds name="background">
     <background>background\ts_first</background>
+    <background>background\ts_djungle</background>
   </backgrounds>
   <paths name="paths">
     <paths name="path_H1">
@@ -95,8 +96,8 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\Menu</room>
-    <room>rooms\rm_P2</room>
     <room>rooms\rm_H1</room>
+    <room>rooms\rm_P2</room>
     <room>rooms\rm_P1</room>
   </rooms>
   <help>
