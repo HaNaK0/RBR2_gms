@@ -48,6 +48,12 @@
       <path>paths\path_SebbesRoom_walk6</path>
       <path>paths\path_SebbesRoom_walk8</path>
       <path>paths\path_SebbesRoom_walk9</path>
+      <path>paths\path_SebbesRoom_walk10</path>
+      <path>paths\path_SebbesRoom_walk11</path>
+      <path>paths\path_SebbesRoom_walk12</path>
+      <path>paths\path_SebbesRoom_walk13</path>
+      <path>paths\path_SebbesRoom_walk14</path>
+      <path>paths\path_SebbesRoom_walk15</path>
     </paths>
     <paths name="path_P1">
       <path>paths\P1_Path1</path>
@@ -92,6 +98,11 @@
           <object>objects\obj_enemy_walk8</object>
           <object>objects\obj_enemy_walk9</object>
           <object>objects\obj_enemy_walk10</object>
+          <object>objects\obj_enemy_walk11</object>
+          <object>objects\obj_enemy_walk12</object>
+          <object>objects\obj_enemy_walk13</object>
+          <object>objects\obj_enemy_walk14</object>
+          <object>objects\obj_enemy_walk15</object>
           <object>objects\obj_enemy_still</object>
         </objects>
       </objects>
@@ -119,11 +130,8 @@
     <object>objects\ctrl_tile</object>
   </objects>
   <rooms name="rooms">
-<<<<<<< HEAD
-    <room>rooms\SebbesRoom</room>
-=======
     <room>rooms\Menu</room>
->>>>>>> pr/3
+    <room>rooms\SebbesRoom</room>
     <room>rooms\rm_P2</room>
     <room>rooms\rm_H1</room>
     <room>rooms\rm_P1</room>
