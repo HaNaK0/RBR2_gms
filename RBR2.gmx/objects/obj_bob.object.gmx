@@ -28,6 +28,9 @@
             <string>X = 0;
 Y = 1;
 
+moveLockL = false
+moveLockR = false
+
 tempPosX = x
 tempPosY = y
 
@@ -120,7 +123,7 @@ releaseDelay = 0.3
 
 //walk accelleration
 accelleration = 1
-accInAir = 0.2
+accInAir = 0.5
 
 //the global gravity aceleration
 grav = 0.3;
@@ -331,6 +334,7 @@ if isFalling == true
     if fallSpeed &gt; fallLimit
     {
         fallSpeed = fallLimit;
+        
     }    
 }
 else
@@ -347,11 +351,19 @@ else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.LEFT
 {
     fallSpeed = jumpForce
     hSpeed = wallJump
+    if keyboard_check(ord('A'))
+    {
+        moveLockL = true
+    }
 }
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.RIGHT
 {
     fallSpeed = jumpForce
     hSpeed = -wallJump
+    if keyboard_check(ord('D'))
+    {
+        moveLockR = true
+    }
 }
 
 // attack lunge 
@@ -378,7 +390,7 @@ if cooldownTimers[6] &gt; 0
 if keyboard_check(ord('A'))
 {
     mySprite = spr_bob_left
-    if hSpeed &gt; -mySpeed
+    if hSpeed &gt; -mySpeed &amp;&amp; !moveLockL
     { 
 
         if isFalling
@@ -394,7 +406,7 @@ if keyboard_check(ord('A'))
 else if keyboard_check(ord('D'))
 {
     mySprite = spr_bob_right
-    if hSpeed &lt; mySpeed
+    if hSpeed &lt; mySpeed &amp;&amp; !moveLockR
     {
         if isFalling
         {
@@ -442,6 +454,16 @@ else
     }
 }
 
+//move keys released
+if keyboard_check_released(ord('A'))
+{
+    moveLockL = false
+}
+
+if keyboard_check_released(ord('D'))
+{
+    moveLockR = false
+}
 // bob animation state runing or idle
 if isFalling
 {
@@ -559,7 +581,7 @@ else if keyboard_check_pressed(vk_left) &amp;&amp; cooldownTimers[timers.attackL
     }
 }
 //attacking left
-else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD] &lt;= 0 &amp;&amp; isFalling &amp;&amp; swordLock[dir.down]
+else if keyboard_check_pressed(vk_down) &amp;&amp; cooldownTimers[timers.attackD] &lt;= 0 &amp;&amp; isFalling &amp;&amp; !swordLock[dir.down]
 {
     if attack == dir.no
     {
@@ -668,7 +690,7 @@ if attack != dir.no &amp;&amp; comboing == false
         }
     }
     
-    // enemy gets destoryed and time is gven to player
+    // enemy gets destoryed and time is given to player
     if hitEnemy != noone
     {
         with(hitEnemy)
