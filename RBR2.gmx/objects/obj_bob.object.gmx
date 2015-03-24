@@ -64,7 +64,7 @@ enum wall {
     RIGHT
 }
 
-nrOfTimers = 8
+nrOfTimers = 9
 /*
 [0] attack right
 [1] attack up
@@ -74,6 +74,7 @@ nrOfTimers = 8
 [5] main
 [6] attack duration
 [7] attack hold
+[8] short jump
 */
 for (i = 0; i  &lt; nrOfTimers; i++)
 {
@@ -86,7 +87,7 @@ for (i = 0; i  &lt; 5; i++)
     hold[i] = 5
 }
 
-//lock until landed or done a walljump
+//lock until landed or done a #walljump
 for (i = 0; i &lt; 5; i++)
 {
     swordLock[i] = false
@@ -95,7 +96,7 @@ for (i = 0; i &lt; 5; i++)
 //time g you get from an enemy
 enemyTime = 5
 
-// attack
+// #attack
 attack = dir.no
 //follow up attack
 followUp = dir.no
@@ -107,14 +108,17 @@ cooldownMain = 1;
 attackDuration =0.1
 attackHold = 0.5
 
-//speed when moving sideways
+
+//#speed when moving sideways
 mySpeedSlowed = 3;
 mySpeedMax = 6;
 mySpeed = mySpeedMax;
 //sped currently moving veritcaly
 hSpeed = 0;
-// the speed your jump astarts at
+// the speed your #jump starts at
 jumpForce = -8;
+weakJumpF = -4;
+shortJumpGrace = 6; //steps
 // the retardation of bob  horizontaly
 drag = 0.8
 dragInAir = 0.1
@@ -125,7 +129,7 @@ releaseDelay = 0.3
 accelleration = 1
 accInAir = 0.5
 
-//the global gravity aceleration
+//the global #gravity aceleration
 grav = 0.3;
 // current fallspeed
 fallSpeed = 0;
@@ -142,18 +146,20 @@ closeToWall = wall.NO
 relDelTimer = -1
 
 //force using to jump from wall
-wallJump = 8
+wallJump = 7
 
 wallRelDel = false
 
-//lunge speed
+//#lunge speed
 lungeSpeed = 8
 
+/*
 //sword position
 swordHiltPos[0] = 0
 swordHiltPos[1] = 0
 swordTipPos[0] = 0
 swordTipPos[1] = 0
+*/
 
 // end position right
 /*
@@ -310,7 +316,7 @@ if relDelTimer == 0
 }
 
 /*
-timers:
+#timers:
 [0] attack right
 [1] attack up
 [2] attack left
@@ -342,10 +348,10 @@ else
     fallSpeed = 0
 }
 
-//jump input
+//#jump input
 if keyboard_check_pressed(vk_space) == true &amp;&amp; isFalling == false
 {
-    fallSpeed = jumpForce
+    cooldownTimers[8] = shortJumpGrace
 }
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.LEFT
 {
@@ -364,6 +370,17 @@ else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.RIGHT
     {
         moveLockR = true
     }
+}
+
+if keyboard_check_released(vk_space) &amp;&amp; cooldownTimers[8] &gt; 0
+{
+    fallSpeed = weakJumpF
+    cooldownTimers[8] = -1
+}
+
+if cooldownTimers[8] == 0
+{
+    fallSpeed = jumpForce
 }
 
 // attack lunge 
@@ -402,6 +419,41 @@ if keyboard_check(ord('A'))
             hSpeed -= accelleration
         }
     }
+    else if moveLockL
+    {
+        if hSpeed &gt; 0
+        {
+            if isFalling
+            {
+                hSpeed -= dragInAir
+            }
+            else
+            {
+                hSpeed -= drag
+            }
+            
+            if hSpeed &lt; 0
+            {
+                hSpeed = 0
+            }
+        }
+        else if hSpeed &lt; 0
+        {
+            if isFalling
+            {
+                hSpeed += dragInAir
+            }
+            else
+            {
+                hSpeed += drag
+            }
+            
+            if hSpeed &gt; 0
+            {
+                hSpeed = 0
+            }
+        }
+    }
 }
 else if keyboard_check(ord('D'))
 {
@@ -416,7 +468,42 @@ else if keyboard_check(ord('D'))
         {
             hSpeed += accelleration
         }
-    }  
+    }
+    else if moveLockR
+    {
+        if hSpeed &gt; 0
+        {
+            if isFalling
+            {
+                hSpeed -= dragInAir
+            }
+            else
+            {
+                hSpeed -= drag
+            }
+            
+            if hSpeed &lt; 0
+            {
+                hSpeed = 0
+            }
+        }
+        else if hSpeed &lt; 0
+        {
+            if isFalling
+            {
+                hSpeed += dragInAir
+            }
+            else
+            {
+                hSpeed += drag
+            }
+            
+            if hSpeed &gt; 0
+            {
+                hSpeed = 0
+            }
+        }
+    }
 }
 else
 {
@@ -464,7 +551,7 @@ if keyboard_check_released(ord('D'))
 {
     moveLockR = false
 }
-// bob animation state runing or idle
+// bob #animation state runing or idle
 if isFalling
 {
     
@@ -478,7 +565,7 @@ else
     bobState = state.idle_1
 }
 
-//animation
+//#animation
 animUpdateTim += 1
 if animUpdateTim &gt;= fps / animSp
 {
@@ -962,11 +1049,7 @@ y = tempPosY
 //Only for bugtesting
 if global.debug
 {
-    draw_set_colour(c_lime)
-    if attack != dir.no
-    {
-        draw_line(x + swordHiltPos[X],y + swordHiltPos[Y],x + swordTipPos[X],y + swordTipPos[Y])
-    }
+    
     
     draw_rectangle(x - 10, y - 11, x + 10, y + 11, true)
 }

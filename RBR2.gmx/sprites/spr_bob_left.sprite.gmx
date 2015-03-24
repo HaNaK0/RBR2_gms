@@ -7,7 +7,7 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>36</bbox_left>
+  <bbox_left>17</bbox_left>
   <bbox_right>62</bbox_right>
   <bbox_top>37</bbox_top>
   <bbox_bottom>65</bbox_bottom>
@@ -44,5 +44,14 @@
     <frame index="21">images\spr_bob_left_21.png</frame>
     <frame index="22">images\spr_bob_left_22.png</frame>
     <frame index="23">images\spr_bob_left_23.png</frame>
+    <frame index="24">images\spr_bob_left_24.png</frame>
+    <frame index="25">images\spr_bob_left_25.png</frame>
+    <frame index="26">images\spr_bob_left_26.png</frame>
+    <frame index="27">images\spr_bob_left_27.png</frame>
+    <frame index="28">images\spr_bob_left_28.png</frame>
+    <frame index="29">images\spr_bob_left_29.png</frame>
+    <frame index="30">images\spr_bob_left_30.png</frame>
+    <frame index="31">images\spr_bob_left_31.png</frame>
+    <frame index="32">images\spr_bob_left_32.png</frame>
   </frames>
 </sprite>
