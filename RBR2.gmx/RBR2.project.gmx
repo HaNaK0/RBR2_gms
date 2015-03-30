@@ -137,6 +137,17 @@
     <room>rooms\rm_H1</room>
     <room>rooms\rm_P1</room>
   </rooms>
+  <constants number="9">
+    <constant name="right">1</constant>
+    <constant name="up">2</constant>
+    <constant name="left">3</constant>
+    <constant name="down">4</constant>
+    <constant name="no_direction">0</constant>
+    <constant name="state_idle_1">0</constant>
+    <constant name="state_idle_2">1</constant>
+    <constant name="state_running">2</constant>
+    <constant name="state_attacking">3</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
