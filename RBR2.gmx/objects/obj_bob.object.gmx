@@ -110,7 +110,7 @@ mySpeed = mySpeedMax;
 hSpeed = 0;
 // the speed your #jump starts at
 jumpForce = -8;
-weakJumpF = -4;
+weakJumpF = -5;
 shortJumpGrace = 6; //steps
 // the retardation of bob  horizontaly
 drag = 0.8
@@ -225,10 +225,24 @@ else
 if collision_line(x - 11, y + 11, x - 11, y - 12, obj_tile, false, false) &amp;&amp; keyboard_check(ord('A'))
 {
     closeToWall = wall.LEFT
+    if swordLock[0]
+    {
+        for(var i = 0; i &lt; 5; i ++)
+        {
+            swordLock[i] = false
+        }
+    }
 }
 else if collision_line(x + 11, y + 11, x + 11, y - 12, obj_tile, false, false) &amp;&amp; keyboard_check(ord('D'))
 {
     closeToWall = wall.RIGHT
+    if swordLock[0]
+    {
+        for(var i = 0; i &lt; 5; i ++)
+        {
+            swordLock[i] = false
+        }
+    }
 }
 else if collision_line(x + 11, y + 11, x + 11, y - 12, obj_tile, false, false) == noone
 {
