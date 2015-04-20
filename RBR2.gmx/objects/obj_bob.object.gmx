@@ -193,7 +193,7 @@ mySprite = spr_bob_right
 var tempPosX = x
 var tempPosY = y
 
-//goal collison
+//#goal collison
 if distance_to_object(obj_goal) &lt; 32
 {
     if collision_rectangle(x - 10, y - 11, x + 10, y - 11, obj_goal, false, true) != noone
