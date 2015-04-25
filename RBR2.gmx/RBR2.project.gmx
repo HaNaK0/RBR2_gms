@@ -70,14 +70,15 @@
   <scripts name="scripts">
     <script>scripts\addTime.gml</script>
     <script>scripts\loadTile.gml</script>
+    <script>scripts\BinaryToInt.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_bob</object>
     <objects name="tiles">
-      <object>objects\obj_tile_half_NW</object>
       <object>objects\obj_tile_full</object>
+      <object>objects\obj_tile_half_NW</object>
       <object>objects\obj_tile</object>
     </objects>
+    <object>objects\obj_bob</object>
     <objects name="debug">
       <object>objects\debug_print</object>
     </objects>

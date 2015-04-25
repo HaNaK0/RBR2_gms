@@ -2,8 +2,8 @@
 <object>
   <spriteName>spr_block</spriteName>
   <solid>-1</solid>
-  <visible>0</visible>
-  <depth>0</depth>
+  <visible>-1</visible>
+  <depth>-4</depth>
   <persistent>0</persistent>
   <parentName>obj_tile</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -38,37 +38,37 @@ if collision_point(x +16 + 32, y +16, obj_tile, false, true) != noone //E
 
 if collision_point(x +16, y +16 + 32, obj_tile, false, true) != noone //S
 {
-    textureIndex += 2
+    textureIndex += 4
     // adds 2
 }
 
 if collision_point(x +16 - 32, y +16, obj_tile, false, true) != noone //W
 {
-    textureIndex += 4
+    textureIndex += 16
     // adds 4
 }
 
 if collision_point(x +16, y +16 - 32, obj_tile, false, true) != noone //N
 {
-    textureIndex += 8
+    textureIndex += 64
     // adds 8
 }
 
 if collision_point(x +16 + 32, y +16 + 32, obj_tile, false, true) != noone //SE
 {
-    textureIndex += 16
+    textureIndex += 2
     // adds 16
 }
 
 if collision_point(x +16 - 32, y +16 + 32, obj_tile, false, true) != noone//SW
 {
-    textureIndex += 32
+    textureIndex += 8
     // adds 32
 }
 
 if collision_point(x +16 - 32, y +16 - 32, obj_tile, false, true) != noone //NW
 {
-     textureIndex += 64
+     textureIndex += 32
      // adds 64
 }
 
@@ -80,6 +80,56 @@ if collision_point(x +16 + 32, y +16 - 32, obj_tile, false, true) != noone //NE
 
 tile_add(ts_first, global.tsTiles[# textureIndex, 0], global.tsTiles[# textureIndex, 1], global.tsTiles[# textureIndex, 2], global.tsTiles[# textureIndex, 3], x + global.tsTiles[# textureIndex, 4], y + global.tsTiles[# textureIndex, 5], -3);
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>524</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_color</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>13</kind>
+            <string>65280</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>613</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_draw_variable</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>-1</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>textureIndex</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
           </argument>
         </arguments>
       </action>
