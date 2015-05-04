@@ -288,12 +288,12 @@
     <option_use_new_audio>True</option_use_new_audio>
     <option_variableerrors>False</option_variableerrors>
     <option_version>010</option_version>
-    <option_version_build>2</option_version_build>
+    <option_version_build>1</option_version_build>
     <option_version_company>The Runners?</option_version_company>
     <option_version_copyright>The runners?</option_version_copyright>
     <option_version_description>the sequel to Run Bob Run</option_version_description>
     <option_version_major>0</option_version_major>
-    <option_version_minor>3</option_version_minor>
+    <option_version_minor>4</option_version_minor>
     <option_version_product>Run Bob Run 2</option_version_product>
     <option_version_release>0</option_version_release>
     <option_win8_advertising_appid></option_win8_advertising_appid>
@@ -332,14 +332,14 @@
     <option_win8_texture_page>1024</option_win8_texture_page>
     <option_win8_wide_logo>Configs\Default\Windows8\logos\logo310.png</option_win8_wide_logo>
     <option_windowcolor>clBlack</option_windowcolor>
-    <option_windows_build_version>2</option_windows_build_version>
+    <option_windows_build_version>1</option_windows_build_version>
     <option_windows_company_info>The Runners?</option_windows_company_info>
     <option_windows_copyright_info>The runners?</option_windows_copyright_info>
     <option_windows_description_info>the sequel to Run Bob Run</option_windows_description_info>
     <option_windows_enable_steam>0</option_windows_enable_steam>
     <option_windows_game_icon>Configs\Default\windows\runner_icon.ico</option_windows_game_icon>
     <option_windows_license>Configs\Default\windows\License.txt</option_windows_license>
-    <option_windows_mainor_version>3</option_windows_mainor_version>
+    <option_windows_mainor_version>4</option_windows_mainor_version>
     <option_windows_major_version>0</option_windows_major_version>
     <option_windows_nsis_file>Configs\Default\windows\RunnerInstaller.nsi</option_windows_nsis_file>
     <option_windows_product_info>Run Bob Run 2</option_windows_product_info>

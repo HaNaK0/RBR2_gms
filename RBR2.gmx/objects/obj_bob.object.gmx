@@ -157,7 +157,7 @@ bobState = state_idle_1
 //animation variables
 
 //animation speed
-animSp = 7 // fps
+animSp = 10 // fps
 
 //current showing frame
 currentFrame = 0
@@ -167,6 +167,9 @@ animUpdateTim = 0
 
 //the sprite
 mySprite = spr_bob_right
+
+//last calculated delta time
+ot = delta_time
 </string>
           </argument>
         </arguments>
@@ -189,7 +192,18 @@ mySprite = spr_bob_right
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//setting up the variables to keep wher the new object will end up
+            <string>newFrame = false
+
+if fps_real &gt; room_speed
+{
+    fpsCor = 1
+}
+else
+{
+    fpsCor = room_speed / fps_real
+}
+
+//setting up the variables to keep wher the new object will end up
 var tempPosX = x
 var tempPosY = y
 
@@ -317,7 +331,7 @@ if keyboard_check_pressed(vk_space) == true &amp;&amp; isFalling == false
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.LEFT
 {
     fallSpeed = jumpForce
-    hSpeed = wallJump
+    hSpeed = wallJump 
     if keyboard_check(ord('A'))
     {
         moveLockL = true
@@ -326,7 +340,7 @@ else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.LEFT
 else if keyboard_check_pressed(vk_space) &amp;&amp; closeToWall = wall.RIGHT
 {
     fallSpeed = jumpForce
-    hSpeed = -wallJump
+    hSpeed = -wallJump 
     if keyboard_check(ord('D'))
     {
         moveLockR = true
@@ -539,6 +553,7 @@ animUpdateTim += 1
 if animUpdateTim &gt;= fps / animSp
 {
     animUpdateTim = 0
+    newFrame = true;
     switch bobState
     {
     case state_running:
@@ -563,6 +578,28 @@ if animUpdateTim &gt;= fps / animSp
         }
     }
 }
+
+if newFrame 
+{
+    if !isFalling
+    {
+        switch currentFrame
+        {
+        case 8:
+        case 11:
+        case 14:
+            audio_play_sound(Step, 2, false)
+            break;
+        }
+    }
+switch currentFrame
+       {
+            case 26:
+                audio_play_sound(Sword1, 2, false)
+                break;
+       }
+}
+
 
 //#attack
 //attacking right
@@ -622,6 +659,7 @@ if currentFrame &gt; 26 &amp;&amp; currentFrame &lt;= 29
         with hitEnemy
         {
             instance_destroy()
+            audio_play_sound(Enemydeath2, 2, false)
         }
         addTime(enemyTime)
     }
@@ -659,10 +697,10 @@ else
 //gravity collision
 if fallSpeed &gt;= 0
 {
-    var vCollision = collision_line(x - 10, y + 16 + fallSpeed, x + 10, y + 16 + fallSpeed, obj_tile, false, false);
+    var vCollision = collision_line(x - 10, y + 16 + fallSpeed * fpsCor, x + 10, y + 16 + fallSpeed * fpsCor, obj_tile, false, false);
     if vCollision == noone
     {
-        tempPosY += fallSpeed;
+        tempPosY += fallSpeed * fpsCor;
     }
     else if vCollision.halfTile
     {
@@ -680,10 +718,10 @@ if fallSpeed &gt;= 0
 }
 else
 {
-    var vCollision = collision_line(x - 10, y - 16 + fallSpeed, x + 10, y - 16 + fallSpeed, obj_tile, false, false);
+    var vCollision = collision_line(x - 10, y - 16 + fallSpeed * fpsCor, x + 10, y - 16 + fallSpeed * fpsCor, obj_tile, false, false);
     if vCollision == noone
     {
-        tempPosY += fallSpeed;
+        tempPosY += fallSpeed * fpsCor;
     }
     else
     {
@@ -695,10 +733,10 @@ else
 // horizontal collision
 if hSpeed &lt; 0
 {   
-    var vCollider = collision_line(x -10 + hSpeed, tempPosY - 15, x -10 + hSpeed, tempPosY + 15, obj_tile_full, false, false)
+    var vCollider = collision_line(x -10 + hSpeed * fpsCor, tempPosY - 15, x -10 + hSpeed *fpsCor, tempPosY + 15, obj_tile_full, false, false)
     if vCollider == noone
     {
-        tempPosX += hSpeed
+        tempPosX += hSpeed * fpsCor
     }
     else
     {
@@ -708,10 +746,10 @@ if hSpeed &lt; 0
 }
 else if hSpeed &gt; 0
 {   
-    var vCollider = collision_line(x +10 + hSpeed, tempPosY - 15, x +10 + hSpeed, tempPosY + 15, obj_tile_full, false, false);
+    var vCollider = collision_line(x +10 + hSpeed * fpsCor, tempPosY - 15, x +10 + hSpeed * fpsCor, tempPosY + 15, obj_tile_full, false, false);
     if vCollider == noone
     {
-        tempPosX += hSpeed
+        tempPosX += hSpeed * fpsCor
     }
     else
     {
@@ -719,9 +757,8 @@ else if hSpeed &gt; 0
         hSpeed = 0
     }
 }
-//movement execution
-//all movement is executed here
-x = tempPosX
+
+x = tempPosX 
 y = tempPosY
 </string>
           </argument>

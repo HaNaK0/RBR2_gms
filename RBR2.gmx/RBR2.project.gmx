@@ -8,6 +8,7 @@
     <sounds name="Audio">
       <sound>sound\Jump</sound>
       <sound>sound\Sword1</sound>
+      <sound>sound\Enemydeath2</sound>
       <sound>sound\Step</sound>
     </sounds>
     <sound>sound\msc_main</sound>
@@ -33,6 +34,7 @@
     <background>background\ts_first</background>
     <background>background\ts_jungle</background>
     <background>background\back_black</background>
+    <background>background\back_1</background>
   </backgrounds>
   <paths name="paths">
     <paths name="SebbesRoom">
@@ -101,6 +103,8 @@
         <object>objects\Enemy1_P2</object>
       </objects>
       <objects name="sebbes_rum">
+        <object>objects\obj_enemy_test1</object>
+        <object>objects\controll_room</object>
         <object>objects\obj_enemy_still</object>
         <object>objects\obj_enemy_walk1</object>
         <object>objects\obj_enemy_walk2</object>
@@ -124,6 +128,7 @@
     </objects>
     <objects name="control">
       <object>objects\ctrl_camera</object>
+      <object>objects\ctrl_tile</object>
     </objects>
     <object>objects\obj_goal</object>
     <objects name="menu">
@@ -131,7 +136,6 @@
       <object>objects\obj_controls</object>
     </objects>
     <object>objects\obj_loading</object>
-    <object>objects\ctrl_tile</object>
     <object>objects\Demo</object>
     <object>objects\ctrl_music</object>
   </objects>

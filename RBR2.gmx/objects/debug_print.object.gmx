@@ -50,7 +50,7 @@
             <kind>1</kind>
             <string>draw_set_colour(c_black)
 draw_text(0, 0, string(fps))
-draw_text(0, 16, string(obj_bob.monsterCol))
+draw_text(0, 16, string(obj_bob.fpsCor))
 draw_text(0, 16 * 2, string(obj_bob.moveLockR))
 draw_text(0, 16 * 3, string(obj_bob.moveLockL))
 //draw_text(x,y + 16 * 2, string(obj_bob.cooldownTimers[6]))
